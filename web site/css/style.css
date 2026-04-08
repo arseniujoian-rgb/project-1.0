@@ -1,26 +1,215 @@
-@import url('https://fonts.googleapis.com/css2?family=Mynerve&family=Noto+Sans:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&display=swap');
-
+/* --- RESET & GLOBALE --- */
 * {
     margin: 0;
     padding: 0;
-    
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Noto Sans', sans-serif;
-    font-weight: 400;
+    background-color: #FFFFFF;
+    color: #2F2F2F;
+    overflow-x: hidden;
 }
 
-a {
+.gold { color: #C09E44; }
+.font-mynerve { font-family: 'Mynerve', cursive; font-weight: 400; }
+
+/* --- HEADER --- */
+.main-header {
+    width: 100%;
+    height: 100px;
+    background-color: #F6F6F6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1440px;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+}
+
+.nav-links { display: flex; gap: 15px; }
+.nav-links a {
+    color: #C09E44;
     text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
-img {
-    max-width: 100%;
+.logo-center img { height: 80px; display: block; }
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+}
+.nav-right a {
+    color: #C09E44;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
-.container {
-    
-    width: 1440px;
+/* Bara Căutare */
+.search-container {
+    display: flex;
+    align-items: center;
+    border-bottom: 1.5px solid #C09E44;
+    padding-bottom: 3px;
+}
+.search-container input {
+    border: none;
+    background: transparent;
+    outline: none;
+    color: #C09E44;
+    font-family: 'Noto Sans', sans-serif;
+    width: 110px;
+    font-size: 14px;
+}
+.search-container input::placeholder { color: #C09E44; opacity: 0.8; text-transform: uppercase; }
+
+/* Vectori (Icoane) */
+.search-icon-svg {
+    width: 18px; height: 18px;
+    stroke: #C09E44; stroke-width: 2; fill: none;
+    cursor: pointer; margin-left: 5px;
+}
+.nav-icons { display: flex; align-items: center; gap: 12px; }
+.icon-circle {
+    width: 32px; height: 32px;
+    border: 1.5px solid #C09E44; border-radius: 50%;
+}
+.icon-cart-svg {
+    width: 24px; height: 24px;
+    stroke: #C09E44; stroke-width: 1.5; fill: none; cursor: pointer;
+}
+
+/* --- WRAPPER PRINCIPAL --- */
+.page-wrapper {
+    max-width: 1200px; /* Lățime restrânsă pentru a apropia pozele, ca în machetă */
+    margin: 180px auto 0;
+    padding: 0 20px;
+}
+
+/* --- DESIGN ASIMETRIC (Secțiunile 1 și 2) --- */
+.asymmetric-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 150px;
+    align-items: start;
+}
+
+/* Tipografie Macheta */
+.title-huge {
+    font-size: 80px;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+.subtitle {
+    font-size: 26px;
+    line-height: 1.4;
+    margin-bottom: 35px;
+}
+
+/* Butonul */
+.btn-blue {
+    background-color: #448ADE;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Aranjare Text și Poze Mici */
+.left-content { padding-right: 40px; }
+.right-content { padding-left: 40px; padding-top: 50px; } /* Coboară puțin textul din dreapta */
+.mt-large { margin-top: 80px; } /* Spațiu mare între buton și poza mică */
+
+/* Poze */
+.img-large {
+    width: 100%;
+    height: 850px;
+    object-fit: cover;
+}
+.img-small {
+    width: 85%; /* Poza mică nu ocupă toată coloana */
+    height: 500px;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- SECȚIUNI PRODUSE --- */
+.product-showcase {
+    text-align: center;
+    margin-bottom: 120px;
+}
+.title-center {
+    font-size: 65px;
+    margin-bottom: 10px;
+}
+.label-category {
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+.four-col-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+}
+.four-col-grid img {
+    width: 100%;
+    aspect-ratio: 4/5; /* Păstrează proporțiile pozelor dreptunghiulare */
+    border-radius: 15px; /* Colțuri rotunjite conform machetei */
+    object-fit: cover;
+}
+
+/* --- FOOTER --- */
+.dark-footer {
+    background-color: #2F2F2F;
+    color: #FFFFFF;
+    padding: 80px 80px 40px;
+}
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 80px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.footer-col h3 { font-size: 16px; margin-bottom: 25px; font-weight: 600; }
+.footer-col ul { list-style: none; }
+.footer-col li { font-size: 13px; margin-bottom: 12px; opacity: 0.8; cursor: pointer; }
+.social-area { text-align: right; }
+.social-icons { display: flex; gap: 20px; justify-content: flex-end; margin-bottom: 20px; font-weight: bold;}
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    max-width: 1400px;
     margin: 0 auto;
 }
+.legal-links span { margin: 0 10px; opacity: 0.8; cursor: pointer; }
