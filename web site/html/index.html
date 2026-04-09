@@ -49,50 +49,50 @@
     <!-- ============ PAGINA PRINCIPALĂ ============ -->
     <main class="page-wrapper">
 
+        <!-- Secțiunea 1: Summer Collection -->
         <section class="asymmetric-section">
             <div class="content-col left-content">
                 <h1 class="font-mynerve gold title-huge">Summer<br>Collection</h1>
                 <p class="font-mynerve gold subtitle">Discover Your Perfect<br>Summer Style</p>
                 <a onclick="openShop()" class="btn-blue">SHOP ALL</a>
-                <img src="../Assets/images/foto2.jpg" alt="Man on beach" class="img-small mt-large" onclick="openLightbox(this)">
+                <!-- IMAGINE MIC STÂNGA (hero-small-left) — schimbă src mai jos sau în js/main.js -->
+                <img id="hero-small-left" src="../Assets/images/foto2.jpg" alt="Man on beach" class="img-small mt-large" onclick="openLightbox(this)">
             </div>
             <div class="image-col">
-                <img src="../Assets/images/foto1.jpg" alt="Woman in boho outfit" class="img-large" onclick="openLightbox(this)">
+                <!-- IMAGINE MARE STÂNGA (hero-large-left) — schimbă src mai jos sau în js/main.js -->
+                <img id="hero-large-left" src="../Assets/images/foto1.jpg" alt="Woman in boho outfit" class="img-large" onclick="openLightbox(this)">
             </div>
         </section>
 
+        <!-- Secțiunea 2: New Arrivals -->
         <section class="asymmetric-section">
             <div class="image-col">
-                <img src="../Assets/images/foto3.jpg" alt="Woman in blue shirt" class="img-large" onclick="openLightbox(this)">
+                <!-- IMAGINE MARE DREAPTA (hero-large-right) — schimbă src mai jos sau în js/main.js -->
+                <img id="hero-large-right" src="../Assets/images/foto3.jpg" alt="Woman in blue shirt" class="img-large" onclick="openLightbox(this)">
             </div>
             <div class="content-col right-content">
                 <h2 class="font-mynerve gold title-huge">New Arrivals<br>for Sunny<br>Days</h2>
                 <p class="font-mynerve gold subtitle">Up to 30% Off for new<br>Selected Items</p>
                 <a href="#" class="btn-blue">NEW ARRIVALS</a>
-                <img src="../Assets/images/foto4.jpg" alt="Man on boat" class="img-small mt-large" onclick="openLightbox(this)">
+                <!-- IMAGINE MIC DREAPTA (hero-small-right) — schimbă src mai jos sau în js/main.js -->
+                <img id="hero-small-right" src="../Assets/images/foto4.jpg" alt="Man on boat" class="img-small mt-large" onclick="openLightbox(this)">
             </div>
         </section>
 
+        <!-- Secțiunea 3: Best Seller - Accessories -->
         <section class="product-showcase">
             <h2 class="font-mynerve gold title-center">Our Best Seller</h2>
             <p class="label-category gold font-mynerve">ACCESSORIES</p>
-            <div class="four-col-grid">
-                <img src="../Assets/images/foto5.jpg" alt="Accessories 1" onclick="openLightbox(this)">
-                <img src="../Assets/images/foto6.jpg" alt="Accessories 2" onclick="openLightbox(this)">
-                <img src="../Assets/images/foto7.jpg" alt="Accessories 3" onclick="openLightbox(this)">
-                <img src="../Assets/images/foto8.jpg" alt="Accessories 4" onclick="openLightbox(this)">
-            </div>
+            <!-- IMAGINILE PENTRU ACCESSORIES sunt definite în js/main.js → IMAGES.accessories -->
+            <div class="four-col-grid" id="grid-accessories"></div>
             <a href="#" class="btn-blue">ACCESSORIES</a>
         </section>
 
+        <!-- Secțiunea 4: Beach -->
         <section class="product-showcase">
             <p class="label-category gold font-mynerve">BEACH</p>
-            <div class="four-col-grid">
-                <img src="../Assets/images/foto9.jpg" alt="Beach 1" onclick="openLightbox(this)">
-                <img src="../Assets/images/foto10.jpg" alt="Beach 2" onclick="openLightbox(this)">
-                <img src="../Assets/images/foto11.jpg" alt="Beach 3" onclick="openLightbox(this)">
-                <img src="../Assets/images/foto12.jpg" alt="Beach 4" onclick="openLightbox(this)">
-            </div>
+            <!-- IMAGINILE PENTRU BEACH sunt definite în js/main.js → IMAGES.beach -->
+            <div class="four-col-grid" id="grid-beach"></div>
             <a href="#" class="btn-blue">BEACH</a>
         </section>
 
@@ -144,7 +144,6 @@
         </div>
     </footer>
 
-
     <!-- ============ SHOP ALL OVERLAY ============ -->
     <div class="shop-overlay" id="shopOverlay">
 
@@ -175,8 +174,6 @@
         </div>
 
         <div class="shop-content">
-
-            <!-- Sidebar filtre -->
             <aside class="shop-sidebar">
                 <div class="breadcrumb">
                     <span onclick="closeShop()">Home</span>
@@ -193,94 +190,17 @@
                 </ul>
             </aside>
 
-            <!-- Grid produse -->
             <div class="shop-main">
                 <h1 class="shop-title">Shop all</h1>
                 <p class="shop-desc">New and Now: Check out the latest arrivals in our collection of clothes, shoes, accessories, and more</p>
-
-                <div class="products-grid" id="productsGrid">
-
-                    <div class="product-card" data-cat="all">
-                        <div class="product-img-wrap">
-                            <img src="../Assets/images/foto13.jpg" alt="Sawyer Striped Barrel Overalls" onclick="openLightbox(this)">
-                            <span class="product-badge">ONLINE EXCLUSIVE</span>
-                        </div>
-                        <p class="product-name">Sawyer Striped Barrel Overalls</p>
-                        <p class="product-price">$98.00</p>
-                    </div>
-
-                    <div class="product-card" data-cat="all">
-                        <div class="product-img-wrap">
-                            <img src="../Assets/images/foto14.jpg" alt="Elvryn One Shoulder Romper" onclick="openLightbox(this)">
-                            <span class="product-badge">ONLINE EXCLUSIVE</span>
-                        </div>
-                        <p class="product-name">Elvryn One Shoulder Romper</p>
-                        <p class="product-price">$74.00</p>
-                    </div>
-
-                    <div class="product-card" data-cat="all">
-                        <div class="product-img-wrap">
-                            <img src="../Assets/images/foto15.jpg" alt="Alyssa Boatneck Tee" onclick="openLightbox(this)">
-                            <span class="product-badge">ONLINE EXCLUSIVE</span>
-                        </div>
-                        <p class="product-name">Alyssa Boatneck Tee</p>
-                        <p class="product-price">$44.00</p>
-                    </div>
-
-                    <div class="product-card" data-cat="all">
-                        <div class="product-img-wrap">
-                            <img src="../Assets/images/foto16.jpg" alt="Dakota Strapless Denim Romper" onclick="openLightbox(this)">
-                            <span class="product-badge">NEW</span>
-                        </div>
-                        <p class="product-name">Dakota Strapless Denim Romper</p>
-                        <p class="product-price">$88.00</p>
-                    </div>
-
-                    <div class="product-card" data-cat="dresses">
-                        <div class="product-img-wrap">
-                            <img src="../Assets/images/foto17.jpg" alt="Mila Linen Midi Dress" onclick="openLightbox(this)">
-                            <span class="product-badge">NEW</span>
-                        </div>
-                        <p class="product-name">Mila Linen Midi Dress</p>
-                        <p class="product-price">$112.00</p>
-                    </div>
-
-                    <div class="product-card" data-cat="accessories">
-                        <div class="product-img-wrap">
-                            <img src="../Assets/images/foto18.jpg" alt="Woven Straw Beach Bag" onclick="openLightbox(this)">
-                            <span class="product-badge">ONLINE EXCLUSIVE</span>
-                        </div>
-                        <p class="product-name">Woven Straw Beach Bag</p>
-                        <p class="product-price">$56.00</p>
-                    </div>
-
-                    <div class="product-card" data-cat="jeans">
-                        <div class="product-img-wrap">
-                            <img src="../Assets/images/foto19.jpg" alt="Cara High-Rise Wide Leg Jeans" onclick="openLightbox(this)">
-                        </div>
-                        <p class="product-name">Cara High-Rise Wide Leg Jeans</p>
-                        <p class="product-price">$94.00</p>
-                    </div>
-
-                    <div class="product-card" data-cat="shoes">
-                        <div class="product-img-wrap">
-                            <img src="../Assets/images/foto20.jpg" alt="Sienna Leather Sandals" onclick="openLightbox(this)">
-                            <span class="product-badge">NEW</span>
-                        </div>
-                        <p class="product-name">Sienna Leather Sandals</p>
-                        <p class="product-price">$68.00</p>
-                    </div>
-
-                </div>
-
+                <!-- PRODUSELE sunt definite în js/main.js → PRODUCTS -->
+                <div class="products-grid" id="productsGrid"></div>
                 <div class="show-more-wrap">
                     <a class="btn-blue">SHOW MORE</a>
                 </div>
             </div>
-
         </div>
     </div>
-
 
     <!-- ============ LIGHTBOX ============ -->
     <div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
@@ -292,81 +212,6 @@
         <button class="lightbox-next" onclick="lightboxNav(1)">&#8594;</button>
     </div>
 
-
-    <!-- ============ JAVASCRIPT ============ -->
-    <script>
-        /* ---- SHOP OVERLAY ---- */
-        function openShop() {
-            document.getElementById('shopOverlay').classList.add('open');
-            document.body.style.overflow = 'hidden';
-            document.getElementById('shopOverlay').scrollTop = 0;
-        }
-
-        function closeShop() {
-            document.getElementById('shopOverlay').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        function filterProducts(el, cat) {
-            document.querySelectorAll('.sidebar-filters li').forEach(li => li.classList.remove('active'));
-            el.classList.add('active');
-            document.querySelectorAll('.product-card').forEach(card => {
-                card.style.display = (cat === 'all' || card.dataset.cat === cat || card.dataset.cat === 'all') ? '' : 'none';
-            });
-        }
-
-        /* ---- LIGHTBOX ---- */
-        let allImages = [];
-        let currentIndex = 0;
-
-        function buildImageList() {
-            allImages = Array.from(document.querySelectorAll(
-                '.img-large, .img-small, .four-col-grid img, .product-img-wrap img'
-            ));
-        }
-
-        function openLightbox(imgEl) {
-            buildImageList();
-            currentIndex = allImages.indexOf(imgEl);
-            if (currentIndex === -1) currentIndex = 0;
-            showLightboxImage(currentIndex);
-            document.getElementById('lightbox').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function showLightboxImage(index) {
-            const img = allImages[index];
-            document.getElementById('lightboxImg').src = img.src;
-            document.getElementById('lightboxImg').alt = img.alt;
-        }
-
-        function lightboxNav(dir) {
-            currentIndex = (currentIndex + dir + allImages.length) % allImages.length;
-            showLightboxImage(currentIndex);
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
-            document.body.style.overflow = document.getElementById('shopOverlay').classList.contains('open') ? 'hidden' : '';
-        }
-
-        function closeLightboxOnBg(e) {
-            if (e.target === document.getElementById('lightbox')) closeLightbox();
-        }
-
-        /* ---- KEYBOARD ---- */
-        document.addEventListener('keydown', e => {
-            const lb = document.getElementById('lightbox');
-            if (e.key === 'Escape') {
-                if (lb.classList.contains('active')) { closeLightbox(); return; }
-                closeShop();
-            }
-            if (lb.classList.contains('active')) {
-                if (e.key === 'ArrowLeft') lightboxNav(-1);
-                if (e.key === 'ArrowRight') lightboxNav(1);
-            }
-        });
-    </script>
-
+    <script src="../js/index.js"></script>
 </body>
 </html>
