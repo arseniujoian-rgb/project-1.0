@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | Sunset</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mynerve&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/product.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="nav-links">
+                <a href="index.html" onclick="sessionStorage.setItem('openShop','1')">SHOP ALL</a>
+                <a href="#">NEW ARRIVALS</a>
+                <a href="#">ACCESSORIES</a>
+                <a href="#">BEACH</a>
+                <a href="#">DRESSES</a>
+            </div>
+            <div class="logo-center">
+                <a href="index.html" title="Acasă">
+                    <img src="../Assets/logo.png" alt="SUNSET Logo">
+                </a>
+            </div>
+            <div class="nav-right">
+                <div class="search-container">
+                    <input type="text" placeholder="SEARCH HERE">
+                    <svg class="search-icon-svg" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+                <a href="#">ABOUT US</a>
+                <a href="#">SIGN IN</a>
+                <div class="nav-icons">
+                    <div class="icon-circle"></div>
+                    <div class="icon-cart">
+                        <svg class="icon-cart-svg" viewBox="0 0 24 24">
+                            <path d="M6 10V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6M3 10h18l-1.5 10H4.5L3 10z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- BUTON ÎNAPOI -->
+    <div class="back-wrap">
+        <button class="btn-back" onclick="window.location='index.html?shop=1'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Back
+        </button>
+    </div>
+
+    <!-- PRODUS -->
+    <main class="product-page">
+
+        <!-- Coloana stânga: thumbnail + imagine mare -->
+        <div class="product-gallery">
+            <div class="thumb-col">
+                <img id="thumb-main" src="" alt="" class="thumb active" onclick="setMain(this)">
+            </div>
+            <div class="main-img-wrap">
+                <img id="mainImg" src="" alt="">
+            </div>
+        </div>
+
+        <!-- Coloana dreapta: detalii -->
+        <div class="product-details">
+            <h1 class="product-title" id="prodName"></h1>
+
+            <!-- Stele -->
+            <div class="stars" id="prodStars">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+            </div>
+
+            <p class="product-price-big" id="prodPrice"></p>
+
+            <div class="divider"></div>
+
+            <!-- Culoare -->
+            <p class="detail-label">Color</p>
+            <div class="color-swatches" id="prodColors"></div>
+
+            <div class="divider"></div>
+
+            <!-- Cantitate -->
+            <p class="detail-label">Quantity*</p>
+            <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty(-1)">&#8722;</button>
+                <span id="qtyVal">1</span>
+                <button class="qty-btn" onclick="changeQty(1)">&#43;</button>
+            </div>
+
+            <button class="btn-add-to-bag">ADD TO BAG</button>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="dark-footer">
+        <div class="footer-main">
+            <div class="footer-col">
+                <h3>HERE TO HELP</h3>
+                <ul>
+                    <li>Help &amp; Contact Us</li>
+                    <li>Our Stories</li>
+                    <li>Accessibility In Our Stores</li>
+                    <li>Product Recalls</li>
+                    <li>Sitemap</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>DELIVERY &amp; RETURNS</h3>
+                <ul>
+                    <li>Where's my order?</li>
+                    <li>Delivery &amp; Collection</li>
+                    <li>Return &amp; Refunds</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>SHOPPING WITH US</h3>
+                <ul>
+                    <li>Sparks</li>
+                    <li>Sparks FAQs</li>
+                    <li>Gift Card Balance</li>
+                    <li>Size Guides</li>
+                    <li>Sustainability</li>
+                </ul>
+            </div>
+            <div class="footer-col social-area">
+                <div class="social-icons">
+                    <a href="#" class="social-btn" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="#" class="social-btn" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                    </a>
+                    <a href="#" class="social-btn" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+                    </a>
+                    <a href="#" class="social-btn" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                </div>
+                <p class="secure-payment">Secure Payment</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 MOMENT [MD]</p>
+            <div class="legal-links">
+                <span>Terms &amp; Conditions</span>
+                <span>Privacy</span>
+                <span>Cookies</span>
+                <span>Accessibility</span>
+                <span>Modern Slavery Act</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* Citește datele produsului din URL */
+        const params = new URLSearchParams(location.search);
+        const src   = params.get('src')   || '';
+        const name  = params.get('name')  || 'Product';
+        const price = params.get('price') || '';
+        const color = params.get('color') || '#C09E44';
+
+        /* Setează imaginea și textele */
+        document.getElementById('mainImg').src       = src;
+        document.getElementById('mainImg').alt       = name;
+        document.getElementById('thumb-main').src    = src;
+        document.getElementById('thumb-main').alt    = name;
+        document.getElementById('prodName').textContent  = name;
+        document.getElementById('prodPrice').textContent = price;
+        document.title = name + ' | Sunset';
+
+        /* Culoare swatch — din URL sau fallback */
+        const swatchEl = document.getElementById('prodColors');
+        const swatch = document.createElement('span');
+        swatch.className = 'swatch active';
+        swatch.style.background = color || '#C09E44';
+        swatch.title = color;
+        swatchEl.appendChild(swatch);
+
+        /* Thumbnail click → schimbă imaginea mare */
+        function setMain(el) {
+            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById('mainImg').src = el.src;
+        }
+
+        /* Cantitate */
+        function changeQty(dir) {
+            const el = document.getElementById('qtyVal');
+            let v = parseInt(el.textContent) + dir;
+            if (v < 1) v = 1;
+            el.textContent = v;
+        }
+
+        /* Rating stele interactive */
+        document.querySelectorAll('.star').forEach((star, i) => {
+            star.addEventListener('click', () => {
+                document.querySelectorAll('.star').forEach((s, j) => {
+                    s.classList.toggle('filled', j <= i);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

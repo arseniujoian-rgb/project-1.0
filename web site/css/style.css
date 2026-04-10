@@ -217,8 +217,10 @@ body {
 .four-col-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: auto;
     gap: 25px;
     margin-bottom: 40px;
+    /* 8 imagini → 4 coloane × 2 rânduri automat */
 }
 .four-col-grid img {
     width: 100%;
@@ -264,24 +266,61 @@ body {
 .social-area { text-align: right; }
 .social-icons {
     display: flex;
-    gap: 20px;
+    gap: 12px;
     justify-content: flex-end;
-    margin-bottom: 20px;
-    font-weight: bold;
+    margin-bottom: 16px;
+}
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    color: #2F2F2F;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+.social-btn:hover {
+    background-color: #C09E44;
+    color: #fff;
+    transform: scale(1.08);
+}
+.social-btn svg {
+    width: 17px;
+    height: 17px;
+}
+.secure-payment {
+    font-size: 13px;
+    opacity: 0.7;
+    text-align: right;
 }
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 30px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 12px;
     max-width: 1400px;
     margin: 0 auto;
 }
+.legal-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
 .legal-links span {
-    margin: 0 10px;
     opacity: 0.8;
     cursor: pointer;
+    padding: 0 14px;
+    border-right: 1px solid rgba(255,255,255,0.3);
+    white-space: nowrap;
+}
+.legal-links span:last-child {
+    border-right: none;
 }
 
 /* ============================================================
