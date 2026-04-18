@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bag | Sunset</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mynerve&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cart.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="nav-container">
+                        <div class="nav-links">
+                <a href="index.html?shop=1">SHOP ALL</a>
+                <a href="index.html?shop=1">NEW ARRIVALS</a>
+                <a href="index.html?shop=1">ACCESSORIES</a>
+                <a href="index.html?shop=1">BEACH</a>
+                <a href="index.html?shop=1">DRESSES</a>
+            </div>
+            <div class="logo-center">
+                <a href="index.html"><img src="../Assets/logo.png" alt="SUNSET Logo"></a>
+            </div>
+            <div class="nav-right">
+                <div class="search-container">
+                    <input type="text" placeholder="SEARCH HERE">
+                    <svg class="search-icon-svg" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </div>
+                <a href="about.html">ABOUT US</a>
+                <a href="account.html">SIGN IN</a>
+                <div class="nav-icons">
+                    <a href="account.html" class="icon-circle-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#C09E44" stroke-width="1.5" width="20" height="20">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </a>
+                    <a href="cart.html" class="icon-cart-btn" id="cartIconWrap">
+                        <svg class="icon-cart-svg" viewBox="0 0 24 24">
+                            <path d="M6 10V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6M3 10h18l-1.5 10H4.5L3 10z"/>
+                        </svg>
+                        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="cart-page">
+
+        <div style="margin-bottom:12px;">
+            <a href="index.html?shop=1" style="display:inline-flex;align-items:center;gap:6px;color:#C09E44;font-size:13px;font-weight:600;font-family:'Noto Sans',sans-serif;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.65'" onmouseout="this.style.opacity='1'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#C09E44" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+                Continue Shopping
+            </a>
+        </div>
+
+        <h1 class="cart-title font-mynerve gold">My Bag</h1>
+
+        <!-- EMPTY STATE -->
+        <div class="cart-empty" id="cartEmpty" style="display:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C09E44" stroke-width="1" width="72" height="72">
+                <path d="M6 10V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6M3 10h18l-1.5 10H4.5L3 10z"/>
+            </svg>
+            <p>Your bag is empty</p>
+            <a href="index.html?shop=1" class="btn-blue">START SHOPPING</a>
+        </div>
+
+        <!-- CART CONTENT -->
+        <div class="cart-layout" id="cartLayout">
+
+            <!-- Items -->
+            <div class="cart-items" id="cartItems"></div>
+
+            <!-- Summary -->
+            <div class="cart-summary" id="cartSummary">
+                <h2 class="summary-title">Order Summary</h2>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="summarySubtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <span id="summaryDelivery">$9.99</span>
+                </div>
+                <div class="summary-row summary-promo">
+                    <span>Promo Code</span>
+                    <div class="promo-wrap">
+                        <input type="text" id="promoInput" placeholder="Enter code">
+                        <button onclick="applyPromo()">APPLY</button>
+                    </div>
+                </div>
+                <p class="promo-msg" id="promoMsg"></p>
+                <div class="summary-divider"></div>
+                <div class="summary-row summary-total">
+                    <span>Total</span>
+                    <span id="summaryTotal">$0.00</span>
+                </div>
+
+                <button class="btn-checkout" onclick="goCheckout()">PROCEED TO CHECKOUT</button>
+                <p class="summary-note">Free delivery on orders over $100</p>
+            </div>
+        </div>
+
+        <!-- CHECKOUT OVERLAY -->
+        <div class="checkout-overlay" id="checkoutOverlay" style="display:none">
+            <div class="checkout-modal">
+                <button class="checkout-close" onclick="closeCheckout()">&#215;</button>
+                <h2 class="font-mynerve gold">Checkout</h2>
+                <p class="checkout-sub">Complete your order details</p>
+
+                <div class="checkout-steps">
+                    <div class="step active" id="step1">
+                        <h3>1. Delivery Details</h3>
+                        <div class="form-group"><label>Full Name</label><input type="text" id="chkName" placeholder="Your full name"></div>
+                        <div class="form-group"><label>Email</label><input type="email" id="chkEmail" placeholder="your@email.com"></div>
+                        <div class="form-group"><label>Phone</label><input type="text" id="chkPhone" placeholder="+373 XXX XXX XXX"></div>
+                        <div class="form-group"><label>Address</label><input type="text" id="chkAddress" placeholder="Street, City, Country"></div>
+                        <button class="btn-acc-submit" onclick="goStep2()">CONTINUE TO PAYMENT</button>
+                    </div>
+
+                    <div class="step" id="step2" style="display:none">
+                        <h3>2. Payment Method</h3>
+                        <div class="payment-methods">
+                            <label class="pay-option active-pay">
+                                <input type="radio" name="pay" value="card" checked>
+                                <span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                                    Credit / Debit Card
+                                </span>
+                            </label>
+                            <label class="pay-option">
+                                <input type="radio" name="pay" value="paypal">
+                                <span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M7 11.5C7 14 9 16 12 16h1c3 0 5-2 5-4.5S16 7 13 7h-2C8 7 7 9 7 11.5z"/><path d="M4 8.5C4 11 6 13 9 13h1"/></svg>
+                                    PayPal
+                                </span>
+                            </label>
+                            <label class="pay-option">
+                                <input type="radio" name="pay" value="cash">
+                                <span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+                                    Cash on Delivery
+                                </span>
+                            </label>
+                        </div>
+                        <div class="card-fields" id="cardFields">
+                            <div class="form-group"><label>Card Number</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)"></div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                                <div class="form-group"><label>Expiry</label><input type="text" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)"></div>
+                                <div class="form-group"><label>CVV</label><input type="text" placeholder="123" maxlength="3"></div>
+                            </div>
+                        </div>
+                        <button class="btn-acc-submit" onclick="placeOrder()">PLACE ORDER — <span id="finalTotal">$0.00</span></button>
+                        <button class="btn-acc-outline" onclick="goStep1()">← Back</button>
+                    </div>
+
+                    <!-- SUCCESS -->
+                    <div class="step" id="stepSuccess" style="display:none">
+                        <div class="order-success">
+                            <div class="success-icon">✓</div>
+                            <h2 class="font-mynerve gold">Order Placed!</h2>
+                            <p>Thank you for your purchase. Your order has been received and is being processed.</p>
+                            <p class="order-number">Order #<span id="orderNum"></span></p>
+                            <a href="index.html" class="btn-blue" style="margin-top:24px;display:inline-block;">CONTINUE SHOPPING</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="dark-footer">
+        <div class="footer-main">
+            <div class="footer-col"><h3>HERE TO HELP</h3><ul><li>Help &amp; Contact Us</li><li>Our Stories</li><li>Accessibility In Our Stores</li><li>Product Recalls</li><li>Sitemap</li></ul></div>
+            <div class="footer-col"><h3>DELIVERY &amp; RETURNS</h3><ul><li>Where's my order?</li><li>Delivery &amp; Collection</li><li>Return &amp; Refunds</li></ul></div>
+            <div class="footer-col"><h3>SHOPPING WITH US</h3><ul><li>Sparks</li><li>Sparks FAQs</li><li>Gift Card Balance</li><li>Size Guides</li><li>Sustainability</li></ul></div>
+            <div class="footer-col social-area">
+                <div class="social-icons">
+                    <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+                    <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM10 15.5v-7l6 3.5-6 3.5z"/></svg></a>
+                    <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+                </div>
+                <p class="secure-payment">Secure Payment</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 MOMENT [MD]</p>
+            <div class="legal-links"><span>Terms &amp; Conditions</span><span>Privacy</span><span>Cookies</span><span>Accessibility</span><span>Modern Slavery Act</span></div>
+        </div>
+    </footer>
+
+    <script src="../js/cart.js"></script>
+    <script>
+        let promoApplied = false;
+        const DELIVERY = 9.99;
+
+        function renderCart() {
+            const cart   = getCart();
+            const empty  = document.getElementById('cartEmpty');
+            const layout = document.getElementById('cartLayout');
+            const items  = document.getElementById('cartItems');
+
+            if (cart.length === 0) {
+                empty.style.display  = 'flex';
+                layout.style.display = 'none';
+                return;
+            }
+            empty.style.display  = 'none';
+            layout.style.display = 'grid';
+
+            items.innerHTML = cart.map((item, i) => `
+                <div class="cart-item">
+                    <img src="${item.src}" alt="${item.name}" class="cart-item-img" onerror="this.style.background='#EDE8DF'">
+                    <div class="cart-item-info">
+                        <p class="ci-name">${item.name}</p>
+                        <div class="ci-color-wrap">
+                            <span class="ci-swatch" style="background:${item.color || '#C09E44'}"></span>
+                        </div>
+                        <p class="ci-price">${item.price}</p>
+                    </div>
+                    <div class="cart-item-right">
+                        <div class="ci-qty">
+                            <button onclick="changeQty(${i}, ${(item.qty||1)-1})">−</button>
+                            <span>${item.qty || 1}</span>
+                            <button onclick="changeQty(${i}, ${(item.qty||1)+1})">+</button>
+                        </div>
+                        <button class="ci-remove" onclick="removeItem(${i})">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                        </button>
+                        <p class="ci-subtotal">$${((parseFloat((item.price||'$0').replace(/[^0-9.]/g,''))*(item.qty||1))).toFixed(2)}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            updateSummary();
+            updateCartBadge();
+        }
+
+        function updateSummary() {
+            const sub      = getCartTotal();
+            const delivery = sub >= 100 ? 0 : DELIVERY;
+            const discount = promoApplied ? sub * 0.1 : 0;
+            const total    = sub - discount + delivery;
+
+            document.getElementById('summarySubtotal').textContent = '$' + sub.toFixed(2);
+            document.getElementById('summaryDelivery').textContent = delivery === 0 ? 'FREE' : '$' + delivery.toFixed(2);
+            document.getElementById('summaryTotal').textContent    = '$' + total.toFixed(2);
+            document.getElementById('finalTotal').textContent      = '$' + total.toFixed(2);
+        }
+
+        function changeQty(i, qty) { updateCartQty(i, qty); renderCart(); }
+        function removeItem(i)     { removeFromCart(i); renderCart(); }
+
+        function applyPromo() {
+            const code = document.getElementById('promoInput').value.trim().toUpperCase();
+            const msg  = document.getElementById('promoMsg');
+            if (code === 'SUNSET10') {
+                promoApplied = true;
+                msg.textContent = '✓ 10% discount applied!';
+                msg.style.color = '#2d8a4e';
+            } else {
+                msg.textContent = 'Invalid promo code.';
+                msg.style.color = '#c0392b';
+            }
+            updateSummary();
+        }
+
+        /* ── Checkout ── */
+        function goCheckout() {
+            /* Pre-fill from account if logged in */
+            const raw = localStorage.getItem('sunset_user');
+            if (raw) {
+                const u = JSON.parse(raw);
+                document.getElementById('chkName').value    = u.name    || '';
+                document.getElementById('chkEmail').value   = u.email   || '';
+                document.getElementById('chkPhone').value   = u.phone   || '';
+                document.getElementById('chkAddress').value = u.address || '';
+            }
+            document.getElementById('checkoutOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeCheckout() {
+            document.getElementById('checkoutOverlay').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        function goStep2() {
+            if (!document.getElementById('chkName').value.trim()) { alert('Please enter your name.'); return; }
+            if (!document.getElementById('chkEmail').value.includes('@')) { alert('Please enter a valid email.'); return; }
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+            /* Show/hide card fields */
+            document.querySelectorAll('input[name="pay"]').forEach(r => {
+                r.addEventListener('change', () => {
+                    document.getElementById('cardFields').style.display = r.value === 'card' ? 'block' : 'none';
+                });
+            });
+        }
+        function goStep1() {
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step1').style.display = 'block';
+        }
+        function placeOrder() {
+            /* Increment orders in account */
+            const raw = localStorage.getItem('sunset_user');
+            if (raw) {
+                const u = JSON.parse(raw);
+                u.orders = (u.orders || 0) + 1;
+                localStorage.setItem('sunset_user', JSON.stringify(u));
+            }
+            /* Clear cart */
+            localStorage.removeItem('sunset_cart');
+            /* Show success */
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('stepSuccess').style.display = 'block';
+            document.getElementById('orderNum').textContent = Math.floor(Math.random() * 90000 + 10000);
+            updateCartBadge();
+        }
+
+        /* Card format helpers */
+        function formatCard(el) {
+            el.value = el.value.replace(/\D/g,'').replace(/(.{4})/g,'$1 ').trim().slice(0,19);
+        }
+        function formatExpiry(el) {
+            el.value = el.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'$1/$2').slice(0,5);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartBadge();
+            renderCart();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeCheckout();
+        });
+    </script>
+</body>
+</html>

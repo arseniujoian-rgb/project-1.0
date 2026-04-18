@@ -14,10 +14,10 @@
         <nav class="nav-container">
             <div class="nav-links">
                 <a onclick="openShop()">SHOP ALL</a>
-                <a href="#">NEW ARRIVALS</a>
-                <a href="#">ACCESSORIES</a>
-                <a href="#">BEACH</a>
-                <a href="#">DRESSES</a>
+                <a href="index.html?shop=1" onclick="setTimeout(()=>{openShop();filterCategory('all')},100)">NEW ARRIVALS</a>
+                <a href="#" onclick="openShop();setTimeout(()=>filterCategory('accessories'),100)">ACCESSORIES</a>
+                <a href="#" onclick="openShop();setTimeout(()=>filterCategory('beach'),100)">BEACH</a>
+                <a href="#" onclick="openShop();setTimeout(()=>filterCategory('dresses'),100)">DRESSES</a>
             </div>
             <div class="logo-center">
                 <a href="index.html" title="Acasă">
@@ -25,22 +25,37 @@
                 </a>
             </div>
             <div class="nav-right">
-                <div class="search-container">
-                    <input type="text" placeholder="SEARCH HERE">
-                    <svg class="search-icon-svg" viewBox="0 0 24 24">
+                <div class="search-container" id="searchContainer">
+                    <input type="text" id="searchInput" placeholder="SEARCH HERE" autocomplete="off" oninput="handleSearch(this.value)" onfocus="handleSearch(this.value)">
+                    <svg class="search-icon-svg" viewBox="0 0 24 24" onclick="handleSearch(document.getElementById('searchInput').value)">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
+                    <!-- SEARCH DROPDOWN -->
+                    <div class="search-dropdown" id="searchDropdown">
+                        <div class="search-dropdown-inner">
+                            <p class="search-hint" id="searchHint">Start typing to search...</p>
+                            <div class="search-results" id="searchResults"></div>
+                        </div>
+                    </div>
                 </div>
-                <a href="#">ABOUT US</a>
-                <a href="#">SIGN IN</a>
+                <a href="about.html">ABOUT US</a>
+                <a href="account.html">SIGN IN</a>
                 <div class="nav-icons">
-                    <div class="icon-circle"></div>
-                    <div class="icon-cart">
+                    <!-- Cont -->
+                    <a href="account.html" class="icon-circle-btn" title="My Account">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#C09E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </a>
+                    <!-- Coș -->
+                    <a href="cart.html" class="icon-cart-btn" title="Cart" id="cartIconWrap">
                         <svg class="icon-cart-svg" viewBox="0 0 24 24">
                             <path d="M6 10V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6M3 10h18l-1.5 10H4.5L3 10z"/>
                         </svg>
-                    </div>
+                        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+                    </a>
                 </div>
             </div>
         </nav>
@@ -170,10 +185,10 @@
             <nav class="nav-container">
                 <div class="nav-links">
                     <a onclick="openShop()" style="font-weight:700;">SHOP ALL</a>
-                    <a href="#">NEW ARRIVALS</a>
-                    <a href="#">ACCESSORIES</a>
-                    <a href="#">BEACH</a>
-                    <a href="#">DRESSES</a>
+                    <a href="index.html?shop=1" onclick="setTimeout(()=>{openShop();filterCategory('all')},100)">NEW ARRIVALS</a>
+                    <a href="#" onclick="openShop();setTimeout(()=>filterCategory('accessories'),100)">ACCESSORIES</a>
+                    <a href="#" onclick="openShop();setTimeout(()=>filterCategory('beach'),100)">BEACH</a>
+                    <a href="#" onclick="openShop();setTimeout(()=>filterCategory('dresses'),100)">DRESSES</a>
                 </div>
                 <div class="logo-center">
                     <a href="index.html" title="Acasă" onclick="closeShop()">
@@ -293,11 +308,15 @@
     </div>
 
     <script src="../js/index.js"></script>
+    <script src="../js/cart.js"></script>
     <script>
-        /* Deschide Shop All automat dacă vine din pagina de produs */
-        if (new URLSearchParams(location.search).get('shop') === '1') {
-            window.addEventListener('DOMContentLoaded', () => openShop());
-        }
+        /* Închide search dropdown la click în afară */
+        document.addEventListener('click', function(e) {
+            const sc = document.getElementById('searchContainer');
+            if (sc && !sc.contains(e.target)) closeSearch();
+        });
+        /* Badge coș */
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
     </script>
 </body>
 </html>

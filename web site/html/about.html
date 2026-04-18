@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Sunset</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mynerve&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <style>
+        .about-page {
+            max-width: 960px;
+            margin: 140px auto 80px;
+            padding: 0 40px;
+        }
+        .about-hero {
+            text-align: center;
+            padding: 60px 0 70px;
+            border-bottom: 1px solid #F0EDE8;
+            margin-bottom: 70px;
+        }
+        .about-hero h1 {
+            font-size: 90px;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .about-hero p {
+            font-size: 18px;
+            color: #888;
+            font-family: 'Noto Sans', sans-serif;
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 70px;
+            align-items: center;
+        }
+        .about-grid.reverse { direction: rtl; }
+        .about-grid.reverse > * { direction: ltr; }
+        .about-img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            border-radius: 16px;
+            background: #EDE8DF;
+            display: block;
+        }
+        .about-text h2 {
+            font-family: 'Mynerve', cursive;
+            font-size: 48px;
+            color: #C09E44;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+        .about-text p {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 14px;
+        }
+        .about-values {
+            background: #F8F5F0;
+            border-radius: 20px;
+            padding: 60px 50px;
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        .about-values h2 {
+            font-family: 'Mynerve', cursive;
+            font-size: 52px;
+            color: #C09E44;
+            margin-bottom: 40px;
+        }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .value-card {
+            padding: 28px 20px;
+            background: #fff;
+            border-radius: 14px;
+            border: 1px solid #EDE8DF;
+            transition: box-shadow 0.2s;
+        }
+        .value-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.07); }
+        .value-icon {
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            background: #FDF8EE;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            color: #C09E44;
+        }
+        .value-card h3 {
+            font-size: 15px; font-weight: 600;
+            color: #2F2F2F; margin-bottom: 8px;
+            font-family: 'Noto Sans', sans-serif;
+        }
+        .value-card p {
+            font-size: 13px; color: #888;
+            line-height: 1.6; font-family: 'Noto Sans', sans-serif;
+        }
+        .about-team {
+            margin-bottom: 70px;
+            text-align: center;
+        }
+        .about-team h2 {
+            font-family: 'Mynerve', cursive;
+            font-size: 52px;
+            color: #C09E44;
+            margin-bottom: 40px;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .team-card { text-align: center; }
+        .team-avatar {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: linear-gradient(135deg, #C09E44, #E8C96E);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; font-weight: 600; color: #fff;
+            margin: 0 auto 14px; font-family: 'Noto Sans', sans-serif;
+        }
+        .team-name { font-size: 15px; font-weight: 600; color: #2F2F2F; font-family: 'Noto Sans', sans-serif; margin-bottom: 4px; }
+        .team-role { font-size: 13px; color: #C09E44; font-family: 'Noto Sans', sans-serif; }
+        .about-cta {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid #F0EDE8;
+        }
+        .about-cta h2 { font-family: 'Mynerve', cursive; font-size: 52px; color: #C09E44; margin-bottom: 14px; }
+        .about-cta p { font-family: 'Noto Sans', sans-serif; font-size: 15px; color: #888; margin-bottom: 28px; }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="nav-links">
+                <a href="index.html?shop=1">SHOP ALL</a>
+                <a href="index.html?arrivals=1">NEW ARRIVALS</a>
+                <a href="index.html?cat=accessories">ACCESSORIES</a>
+                <a href="index.html?cat=beach">BEACH</a>
+                <a href="index.html?cat=dresses">DRESSES</a>
+            </div>
+            <div class="logo-center">
+                <a href="index.html"><img src="../Assets/logo.png" alt="SUNSET Logo"></a>
+            </div>
+            <div class="nav-right">
+                <div class="search-container">
+                    <input type="text" placeholder="SEARCH HERE">
+                    <svg class="search-icon-svg" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </div>
+                <a href="about.html" style="font-weight:700;">ABOUT US</a>
+                <a href="account.html">SIGN IN</a>
+                <div class="nav-icons">
+                    <a href="account.html" class="icon-circle-btn" title="My Account">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#C09E44" stroke-width="1.5" width="20" height="20">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </a>
+                    <a href="cart.html" class="icon-cart-btn" id="cartIconWrap">
+                        <svg class="icon-cart-svg" viewBox="0 0 24 24">
+                            <path d="M6 10V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6M3 10h18l-1.5 10H4.5L3 10z"/>
+                        </svg>
+                        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="about-page">
+
+        <!-- HERO -->
+        <div class="about-hero">
+            <h1 class="font-mynerve gold">About Us</h1>
+            <p>We believe summer is a feeling — and we're here to help you wear it.</p>
+        </div>
+
+        <!-- STORY -->
+        <div class="about-grid">
+            <div class="about-img" style="background: linear-gradient(135deg, #F8F0E0, #EDE8DF); display:flex; align-items:center; justify-content:center;">
+                <svg viewBox="0 0 120 120" width="80" height="80" fill="none">
+                    <circle cx="60" cy="60" r="55" stroke="#C09E44" stroke-width="1.5"/>
+                    <path d="M60 20 L60 100 M20 60 L100 60" stroke="#C09E44" stroke-width="1"/>
+                    <circle cx="60" cy="60" r="20" stroke="#C09E44" stroke-width="1.5"/>
+                </svg>
+            </div>
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>SUNSET was born from a love of long summer days, warm light, and effortless style. Founded in 2024, we set out to create a curated fashion destination that captures the spirit of the season.</p>
+                <p>Every piece in our collection is chosen with care — from breezy beach essentials to statement accessories that travel from the shore to the city. We believe fashion should feel as good as a sunset looks.</p>
+            </div>
+        </div>
+
+        <!-- MISSION -->
+        <div class="about-grid reverse">
+            <div class="about-img" style="background: linear-gradient(135deg, #EDE8DF, #D8CCB8); display:flex; align-items:center; justify-content:center;">
+                <svg viewBox="0 0 120 120" width="80" height="80" fill="none">
+                    <path d="M30 90 Q60 30 90 90" stroke="#C09E44" stroke-width="1.5"/>
+                    <circle cx="60" cy="55" r="15" stroke="#C09E44" stroke-width="1.5"/>
+                    <line x1="60" y1="20" x2="60" y2="40" stroke="#C09E44" stroke-width="1.5"/>
+                </svg>
+            </div>
+            <div class="about-text">
+                <h2>Our Mission</h2>
+                <p>To make summer style accessible, inspiring, and joyful for everyone. We curate collections that blend contemporary trends with timeless warmth — clothes that make you feel confident, free, and completely yourself.</p>
+                <p>Sustainability is at the heart of what we do. We partner with responsible suppliers and choose natural fabrics wherever possible, because we want the planet to enjoy many more summers too.</p>
+            </div>
+        </div>
+
+        <!-- VALUES -->
+        <div class="about-values">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>Quality First</h3>
+                    <p>Every item is carefully selected for quality, comfort, and lasting style. No compromises.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </div>
+                    <h3>Made with Love</h3>
+                    <p>From design to delivery, every detail is handled with passion and attention to our customers.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h3>Sustainability</h3>
+                    <p>We choose natural materials and ethical partners to minimize our footprint on the planet.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEAM -->
+        <div class="about-team">
+            <h2>Meet the Team</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">A</div>
+                    <p class="team-name">Arsen</p>
+                    <p class="team-role">Founder & Developer</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="about-cta">
+            <h2>Ready to Shop?</h2>
+            <p>Discover our latest summer collection and find your perfect look.</p>
+            <a href="index.html?shop=1" class="btn-blue">SHOP NOW</a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="dark-footer">
+        <div class="footer-main">
+            <div class="footer-col"><h3>HERE TO HELP</h3><ul><li>Help &amp; Contact Us</li><li>Our Stories</li><li>Accessibility In Our Stores</li><li>Product Recalls</li><li>Sitemap</li></ul></div>
+            <div class="footer-col"><h3>DELIVERY &amp; RETURNS</h3><ul><li>Where's my order?</li><li>Delivery &amp; Collection</li><li>Return &amp; Refunds</li></ul></div>
+            <div class="footer-col"><h3>SHOPPING WITH US</h3><ul><li>Sparks</li><li>Sparks FAQs</li><li>Gift Card Balance</li><li>Size Guides</li><li>Sustainability</li></ul></div>
+            <div class="footer-col social-area">
+                <div class="social-icons">
+                    <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+                    <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM10 15.5v-7l6 3.5-6 3.5z"/></svg></a>
+                    <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+                </div>
+                <p class="secure-payment">Secure Payment</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 MOMENT [MD]</p>
+            <div class="legal-links"><span>Terms &amp; Conditions</span><span>Privacy</span><span>Cookies</span><span>Accessibility</span><span>Modern Slavery Act</span></div>
+        </div>
+    </footer>
+
+    <script src="../js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
+    </script>
+</body>
+</html>

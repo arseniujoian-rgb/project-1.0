@@ -235,3 +235,115 @@ document.addEventListener('DOMContentLoaded', () => {
     buildImageGrid('grid-beach',       IMAGES.beach);
     buildProductsGrid();
 });
+
+
+/* ============================================================
+   SEARCH — caută în toate produsele din PRODUCTS
+   ============================================================ */
+
+function handleSearch(query) {
+    const dropdown  = document.getElementById('searchDropdown');
+    const results   = document.getElementById('searchResults');
+    const hint      = document.getElementById('searchHint');
+    const q         = query.trim().toLowerCase();
+
+    dropdown.classList.add('open');
+
+    if (q.length === 0) {
+        hint.style.display = 'block';
+        results.innerHTML  = '';
+        return;
+    }
+
+    hint.style.display = 'none';
+
+    /* Caută în name, cat și badge */
+    const matches = PRODUCTS.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.cat.toLowerCase().includes(q)  ||
+        p.badge.toLowerCase().includes(q)
+    );
+
+    if (matches.length === 0) {
+        results.innerHTML = `
+            <div class="search-no-results">
+                No results for "<strong>${escHtml(query)}</strong>"
+                <span>Try a different keyword</span>
+            </div>`;
+        return;
+    }
+
+    /* Afișează max 8 rezultate */
+    const shown = matches.slice(0, 8);
+    const catLabel = { all: 'Clothing', accessories: 'Accessories', dresses: 'Dresses', jeans: 'Jeans', shoes: 'Shoes' };
+
+    results.innerHTML = `<div class="search-count">${matches.length} result${matches.length !== 1 ? 's' : ''} found</div>` +
+        shown.map(p => {
+            const url = `product.html?src=${encodeURIComponent(p.src)}&name=${encodeURIComponent(p.name)}&price=${encodeURIComponent(p.price)}&color=${encodeURIComponent(p.color || '#C09E44')}`;
+            const highlight = (text) => text.replace(new RegExp(`(${escRegex(q)})`, 'gi'), '<mark style="background:#FFF3C4;border-radius:2px;padding:0 1px;">$1</mark>');
+            return `
+            <a class="search-result-item" href="${url}">
+                <img class="search-result-img" src="${p.src}" alt="${escHtml(p.name)}" onerror="this.style.background='#EDE8DF'">
+                <div class="search-result-info">
+                    <div class="search-result-name">${highlight(p.name)}</div>
+                    <div class="search-result-cat">${catLabel[p.cat] || p.cat}</div>
+                    <div class="search-result-price">${p.price}</div>
+                </div>
+                ${p.badge ? `<span class="search-result-badge">${p.badge}</span>` : ''}
+            </a>`;
+        }).join('');
+}
+
+function closeSearch() {
+    const d = document.getElementById('searchDropdown');
+    const i = document.getElementById('searchInput');
+    if (d) d.classList.remove('open');
+    if (i) i.value = '';
+}
+
+function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escRegex(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/* Închide cu Escape */
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSearch();
+});
+
+
+/* ============================================================
+   NAVIGARE DIN NAV — deschide Shop cu filtrul corect
+   ============================================================ */
+function filterCategory(cat) {
+    /* Găsește butonul din sidebar și apasă-l */
+    const catMap = {
+        'accessories': 'accessories',
+        'dresses':     'dresses',
+        'beach':       'all',
+        'all':         'all'
+    };
+    const target = catMap[cat] || 'all';
+    const btns   = document.querySelectorAll('.sidebar-filters li');
+    btns.forEach(btn => {
+        const onclick = btn.getAttribute('onclick') || '';
+        if (onclick.includes("'" + target + "'")) {
+            btn.click();
+        }
+    });
+}
+
+/* Auto-deschide Shop + filtrează dacă URL are parametri */
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('shop') === '1') {
+        openShop();
+    }
+    const cat = params.get('cat');
+    if (cat) {
+        openShop();
+        setTimeout(() => filterCategory(cat), 80);
+    }
+});
