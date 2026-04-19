@@ -1,322 +1,891 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunset | Summer Collection</title>
-    <link href="https://fonts.googleapis.com/css2?family=Mynerve&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunset | Summer Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Mynerve&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/cart.css">
+<link rel="stylesheet" href="../css/account.css">
+<link rel="stylesheet" href="../css/product.css">
+<style>
+/* ── OVERLAY GENERIC ── */
+.page-overlay {
+    position: fixed; inset: 0; background: #fff;
+    z-index: 3000; transform: translateY(100%);
+    transition: transform 0.45s cubic-bezier(0.77,0,0.175,1);
+    overflow-y: auto; display: flex; flex-direction: column;
+}
+.page-overlay.open { transform: translateY(0); }
+.overlay-header {
+    width: 100%; height: 100px; background: #F6F6F6;
+    display: flex; justify-content: center; align-items: center;
+    position: sticky; top: 0; z-index: 10;
+    border-bottom: 1px solid rgba(192,158,68,.15); flex-shrink: 0;
+}
+.overlay-header .nav-container { display: grid; grid-template-columns: 1fr auto 1fr; }
+.overlay-back {
+    background: none; border: none; cursor: pointer; color: #C09E44;
+    font-size: 13px; font-weight: 600; font-family: 'Noto Sans',sans-serif;
+    text-transform: uppercase; letter-spacing: .5px;
+    display: flex; align-items: center; gap: 8px; transition: opacity .2s;
+    position: absolute; left: 40px; top: 50%; transform: translateY(-50%);
+}
+.overlay-back:hover { opacity: .65; }
+.overlay-back svg { width:18px; height:18px; stroke:#C09E44; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.overlay-close {
+    background: none; border: none; cursor: pointer; color: #C09E44;
+    font-size: 13px; font-weight: 600; font-family: 'Noto Sans',sans-serif;
+    text-transform: uppercase; letter-spacing: .5px;
+    display: flex; align-items: center; gap: 8px; transition: opacity .2s;
+    position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+}
+.overlay-close:hover { opacity:.65; }
+.overlay-close svg { width:18px; height:18px; stroke:#C09E44; fill:none; stroke-width:2; stroke-linecap:round; }
+.overlay-body { flex: 1; }
+
+/* ── PRODUCT overlay ── */
+.prod-overlay-body { max-width:1100px; margin:0 auto; padding:40px 40px 80px; display:grid; grid-template-columns:1fr 380px; gap:60px; align-items:start; }
+
+/* ── INFO PAGES ── */
+.info-page-body { max-width:780px; margin:0 auto; padding:40px 40px 80px; }
+.info-page-body h1 { font-size:64px; color:#C09E44; margin-bottom:10px; line-height:1; }
+.info-page-body .subtitle { font-size:15px; color:#888; font-family:'Noto Sans',sans-serif; margin-bottom:40px; border-bottom:1px solid #F0EDE8; padding-bottom:28px; }
+.info-section { margin-bottom:36px; }
+.info-section h2 { font-size:17px; font-weight:600; color:#2F2F2F; font-family:'Noto Sans',sans-serif; margin-bottom:12px; }
+.info-section p, .info-section li { font-size:14px; color:#555; font-family:'Noto Sans',sans-serif; line-height:1.8; margin-bottom:8px; }
+.info-section ul { padding-left:20px; }
+.info-section li { list-style:disc; }
+.info-highlight { background:#F8F5F0; border-left:3px solid #C09E44; padding:16px 20px; border-radius:0 8px 8px 0; margin:18px 0; }
+.info-highlight p { margin:0; color:#2F2F2F; font-weight:600; font-family:'Noto Sans',sans-serif; }
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px; }
+.contact-card { background:#F8F5F0; border-radius:12px; padding:24px; border:1px solid #EDE8DF; }
+.contact-card svg { color:#C09E44; margin-bottom:10px; }
+.contact-card h3 { font-size:14px; font-weight:600; font-family:'Noto Sans',sans-serif; margin-bottom:6px; }
+.contact-card p { font-size:13px; color:#888; font-family:'Noto Sans',sans-serif; margin:0; line-height:1.6; }
+.contact-card a { color:#448ADE; text-decoration:none; }
+
+/* ── ABOUT ── */
+.about-hero { text-align:center; padding:50px 0 60px; border-bottom:1px solid #F0EDE8; margin-bottom:60px; }
+.about-hero h1 { font-size:80px; line-height:1; margin-bottom:14px; }
+.about-hero p { font-size:17px; color:#888; font-family:'Noto Sans',sans-serif; }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:50px; margin-bottom:60px; align-items:center; }
+.about-grid.reverse { direction:rtl; }
+.about-grid.reverse > * { direction:ltr; }
+.about-img-ph { width:100%; aspect-ratio:4/5; border-radius:16px; background:#EDE8DF; display:flex; align-items:center; justify-content:center; }
+.about-text h2 { font-family:'Mynerve',cursive; font-size:44px; color:#C09E44; margin-bottom:14px; }
+.about-text p { font-family:'Noto Sans',sans-serif; font-size:14px; color:#555; line-height:1.8; margin-bottom:12px; }
+.about-values { background:#F8F5F0; border-radius:20px; padding:50px; text-align:center; margin-bottom:60px; }
+.about-values h2 { font-family:'Mynerve',cursive; font-size:48px; color:#C09E44; margin-bottom:36px; }
+.values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.value-card { padding:24px 18px; background:#fff; border-radius:14px; border:1px solid #EDE8DF; }
+.value-icon { width:48px; height:48px; border-radius:50%; background:#FDF8EE; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; color:#C09E44; }
+.value-card h3 { font-size:14px; font-weight:600; color:#2F2F2F; margin-bottom:8px; font-family:'Noto Sans',sans-serif; }
+.value-card p { font-size:13px; color:#888; line-height:1.6; font-family:'Noto Sans',sans-serif; }
+.team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.team-card { text-align:center; }
+.team-avatar { width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg,#C09E44,#E8C96E); display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:600; color:#fff; margin:0 auto 12px; font-family:'Noto Sans',sans-serif; }
+.team-name { font-size:14px; font-weight:600; color:#2F2F2F; font-family:'Noto Sans',sans-serif; margin-bottom:4px; }
+.team-role { font-size:13px; color:#C09E44; font-family:'Noto Sans',sans-serif; }
+.about-cta { text-align:center; padding:50px 0; border-top:1px solid #F0EDE8; }
+.about-cta h2 { font-family:'Mynerve',cursive; font-size:48px; color:#C09E44; margin-bottom:12px; }
+.about-cta p { font-family:'Noto Sans',sans-serif; font-size:14px; color:#888; margin-bottom:24px; }
+.about-page-body { max-width:900px; margin:0 auto; padding:40px 40px 80px; }
+
+/* ── SIZE TABLE ── */
+.size-table { width:100%; border-collapse:collapse; font-family:'Noto Sans',sans-serif; font-size:13px; margin-top:10px; }
+.size-table th { padding:10px 14px; text-align:left; border:1px solid #EDE8DF; background:#F8F5F0; }
+.size-table td { padding:9px 14px; border:1px solid #EDE8DF; }
+.size-table tr:nth-child(even) td { background:#FAFAF8; }
+
+/* ── CART inside overlay ── */
+.cart-overlay-body { max-width:1100px; margin:0 auto; padding:40px 40px 80px; }
+
+/* ── Checkout overlay (inside cart overlay) ── */
+.checkout-overlay { position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:9500; align-items:center; justify-content:center; }
+
+/* ── SIGN IN/ACCOUNT inside overlay ── */
+.account-overlay-body { max-width:520px; margin:0 auto; padding:40px 40px 80px; }
+
+/* ── FOOTER inside overlays ── */
+.overlay-footer { background:#2F2F2F; color:#fff; padding:60px 80px 30px; margin-top:auto; }
+</style>
 </head>
 <body>
 
-    <!-- ============ HEADER PRINCIPAL ============ -->
-    <header class="main-header">
-        <nav class="nav-container">
-            <div class="nav-links">
-                <a onclick="openShop()">SHOP ALL</a>
-                <a href="index.html?shop=1" onclick="setTimeout(()=>{openShop();filterCategory('all')},100)">NEW ARRIVALS</a>
-                <a href="#" onclick="openShop();setTimeout(()=>filterCategory('accessories'),100)">ACCESSORIES</a>
-                <a href="#" onclick="openShop();setTimeout(()=>filterCategory('beach'),100)">BEACH</a>
-                <a href="#" onclick="openShop();setTimeout(()=>filterCategory('dresses'),100)">DRESSES</a>
+<!-- ════════════════════════════════════════════════
+     HEADER PRINCIPAL
+════════════════════════════════════════════════ -->
+<header class="main-header">
+    <nav class="nav-container">
+        <div class="nav-links">
+            <a onclick="openShop()">SHOP ALL</a>
+            <a onclick="openShop()">NEW ARRIVALS</a>
+            <a onclick="openShop();setTimeout(()=>filterCategory('accessories'),80)">ACCESSORIES</a>
+            <a onclick="openShop();setTimeout(()=>filterCategory('beach'),80)">BEACH</a>
+            <a onclick="openShop();setTimeout(()=>filterCategory('dresses'),80)">DRESSES</a>
+        </div>
+        <div class="logo-center">
+            <a href="#" onclick="closeAll()"><img src="../Assets/logo.png" alt="SUNSET Logo"></a>
+        </div>
+        <div class="nav-right">
+            <div class="search-container" id="searchContainer">
+                <input type="text" id="searchInput" placeholder="SEARCH HERE" autocomplete="off" oninput="handleSearch(this.value)" onfocus="handleSearch(this.value)">
+                <svg class="search-icon-svg" viewBox="0 0 24 24" onclick="handleSearch(document.getElementById('searchInput').value)">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <div class="search-dropdown" id="searchDropdown">
+                    <div class="search-dropdown-inner">
+                        <p class="search-hint" id="searchHint">Start typing to search...</p>
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+                </div>
             </div>
-            <div class="logo-center">
-                <a href="index.html" title="Acasă">
-                    <img src="../Assets/logo.png" alt="SUNSET Logo">
-                </a>
-            </div>
-            <div class="nav-right">
-                <div class="search-container" id="searchContainer">
-                    <input type="text" id="searchInput" placeholder="SEARCH HERE" autocomplete="off" oninput="handleSearch(this.value)" onfocus="handleSearch(this.value)">
-                    <svg class="search-icon-svg" viewBox="0 0 24 24" onclick="handleSearch(document.getElementById('searchInput').value)">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <a onclick="openAbout()">ABOUT US</a>
+            <a onclick="openAccount()">SIGN IN</a>
+            <div class="nav-icons">
+                <button class="icon-circle-btn" onclick="openAccount()" title="My Account" style="border:none;cursor:pointer;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#C09E44" stroke-width="1.5" width="20" height="20">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
                     </svg>
-                    <!-- SEARCH DROPDOWN -->
-                    <div class="search-dropdown" id="searchDropdown">
-                        <div class="search-dropdown-inner">
-                            <p class="search-hint" id="searchHint">Start typing to search...</p>
-                            <div class="search-results" id="searchResults"></div>
-                        </div>
-                    </div>
-                </div>
-                <a href="about.html">ABOUT US</a>
-                <a href="account.html">SIGN IN</a>
-                <div class="nav-icons">
-                    <!-- Cont -->
-                    <a href="account.html" class="icon-circle-btn" title="My Account">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#C09E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
-                        </svg>
-                    </a>
-                    <!-- Coș -->
-                    <a href="cart.html" class="icon-cart-btn" title="Cart" id="cartIconWrap">
-                        <svg class="icon-cart-svg" viewBox="0 0 24 24">
-                            <path d="M6 10V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6M3 10h18l-1.5 10H4.5L3 10z"/>
-                        </svg>
-                        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
-                    </a>
-                </div>
+                </button>
+                <button class="icon-cart-btn" onclick="openCart()" title="Cart" id="cartIconWrap" style="border:none;background:none;cursor:pointer;">
+                    <svg class="icon-cart-svg" viewBox="0 0 24 24">
+                        <path d="M6 10V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6M3 10h18l-1.5 10H4.5L3 10z"/>
+                    </svg>
+                    <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+                </button>
             </div>
+        </div>
+    </nav>
+</header>
+
+<!-- ════════════════════════════════════════════════
+     PAGINA PRINCIPALĂ
+════════════════════════════════════════════════ -->
+<main class="page-wrapper">
+    <section class="asymmetric-section">
+        <div class="content-col left-content">
+            <h1 class="font-mynerve gold title-huge">Summer<br>Collection</h1>
+            <p class="font-mynerve gold subtitle">Discover Your Perfect<br>Summer Style</p>
+            <a onclick="openShop()" class="btn-blue">SHOP ALL</a>
+            <img id="hero-small-left" src="../Assets/images/foto2.jpg" alt="Man on beach" class="img-small mt-large" onclick="openLightbox(this)">
+        </div>
+        <div class="image-col">
+            <img id="hero-large-left" src="../Assets/images/foto1.jpg" alt="Woman in boho outfit" class="img-large" onclick="openLightbox(this)">
+        </div>
+    </section>
+    <section class="asymmetric-section">
+        <div class="image-col">
+            <img id="hero-large-right" src="../Assets/images/foto3.jpg" alt="Woman in blue shirt" class="img-large" onclick="openLightbox(this)">
+        </div>
+        <div class="content-col right-content">
+            <h2 class="font-mynerve gold title-huge">New Arrivals<br>for Sunny<br>Days</h2>
+            <p class="font-mynerve gold subtitle">Up to 30% Off for new<br>Selected Items</p>
+            <a onclick="openShop()" class="btn-blue">NEW ARRIVALS</a>
+            <img id="hero-small-right" src="../Assets/images/foto4.jpg" alt="Man on boat" class="img-small mt-large" onclick="openLightbox(this)">
+        </div>
+    </section>
+    <section class="product-showcase">
+        <h2 class="font-mynerve gold title-center">Our Best Seller</h2>
+        <p class="label-category gold font-mynerve">ACCESSORIES</p>
+        <div class="four-col-grid" id="grid-accessories"></div>
+        <a onclick="openShop();setTimeout(()=>filterCategory('accessories'),80)" class="btn-blue">ACCESSORIES</a>
+    </section>
+    <section class="product-showcase">
+        <p class="label-category gold font-mynerve">BEACH</p>
+        <div class="four-col-grid" id="grid-beach"></div>
+        <a onclick="openShop();setTimeout(()=>filterCategory('beach'),80)" class="btn-blue">BEACH</a>
+    </section>
+</main>
+
+<!-- ════════════════════════════════════════════════
+     FOOTER PRINCIPAL
+════════════════════════════════════════════════ -->
+<footer class="dark-footer">
+    <div class="footer-main">
+        <div class="footer-col"><h3>HERE TO HELP</h3><ul>
+            <li><a onclick="openInfoPage('help')" style="cursor:pointer;color:inherit;">Help &amp; Contact Us</a></li>
+            <li><a onclick="openInfoPage('stories')" style="cursor:pointer;color:inherit;">Our Stories</a></li>
+            <li><a onclick="openInfoPage('accessibility')" style="cursor:pointer;color:inherit;">Accessibility In Our Stores</a></li>
+            <li><a onclick="openInfoPage('recalls')" style="cursor:pointer;color:inherit;">Product Recalls</a></li>
+            <li><a onclick="openInfoPage('sitemap')" style="cursor:pointer;color:inherit;">Sitemap</a></li>
+        </ul></div>
+        <div class="footer-col"><h3>DELIVERY &amp; RETURNS</h3><ul>
+            <li><a onclick="openInfoPage('tracking')" style="cursor:pointer;color:inherit;">Where's my order?</a></li>
+            <li><a onclick="openInfoPage('delivery')" style="cursor:pointer;color:inherit;">Delivery &amp; Collection</a></li>
+            <li><a onclick="openInfoPage('returns')" style="cursor:pointer;color:inherit;">Return &amp; Refunds</a></li>
+        </ul></div>
+        <div class="footer-col"><h3>SHOPPING WITH US</h3><ul>
+            <li><a onclick="openInfoPage('sparks')" style="cursor:pointer;color:inherit;">Sparks</a></li>
+            <li><a onclick="openInfoPage('sparks-faq')" style="cursor:pointer;color:inherit;">Sparks FAQs</a></li>
+            <li><a onclick="openInfoPage('giftcard')" style="cursor:pointer;color:inherit;">Gift Card Balance</a></li>
+            <li><a onclick="openInfoPage('sizes')" style="cursor:pointer;color:inherit;">Size Guides</a></li>
+            <li><a onclick="openInfoPage('sustainability')" style="cursor:pointer;color:inherit;">Sustainability</a></li>
+        </ul></div>
+        <div class="footer-col social-area">
+            <div class="social-icons">
+                <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+                <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM10 15.5v-7l6 3.5-6 3.5z"/></svg></a>
+                <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            </div>
+            <p class="secure-payment">Secure Payment</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 MOMENT [MD]</p>
+        <div class="legal-links">
+            <span onclick="openInfoPage('terms')" style="cursor:pointer;">Terms &amp; Conditions</span>
+            <span onclick="openInfoPage('privacy')" style="cursor:pointer;">Privacy</span>
+            <span onclick="openInfoPage('cookies')" style="cursor:pointer;">Cookies</span>
+            <span onclick="openInfoPage('accessibility')" style="cursor:pointer;">Accessibility</span>
+            <span onclick="openInfoPage('slavery')" style="cursor:pointer;">Modern Slavery Act</span>
+        </div>
+    </div>
+</footer>
+
+<!-- ════════════════════════════════════════════════
+     OVERLAY: SHOP ALL
+════════════════════════════════════════════════ -->
+<div class="shop-overlay page-overlay" id="shopOverlay">
+    <div class="shop-header overlay-header">
+        <nav class="nav-container" style="position:relative;">
+            <div class="nav-links">
+                <a onclick="filterCategory('all')" style="cursor:pointer;">CLOTHING</a>
+                <a onclick="filterCategory('accessories')" style="cursor:pointer;">ACCESSORIES</a>
+                <a onclick="filterCategory('dresses')" style="cursor:pointer;">DRESSES</a>
+                <a onclick="filterCategory('jeans')" style="cursor:pointer;">JEANS</a>
+                <a onclick="filterCategory('shoes')" style="cursor:pointer;">SHOES</a>
+            </div>
+            <div class="logo-center"><a onclick="closeAll()" style="cursor:pointer;"><img src="../Assets/logo.png" alt="SUNSET Logo"></a></div>
+            <button class="overlay-close" onclick="closeShop()">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>CLOSE
+            </button>
         </nav>
-    </header>
-
-    <!-- ============ PAGINA PRINCIPALĂ ============ -->
-    <main class="page-wrapper">
-
-        <!-- Secțiunea 1: Summer Collection -->
-        <section class="asymmetric-section">
-            <div class="content-col left-content">
-                <h1 class="font-mynerve gold title-huge">Summer<br>Collection</h1>
-                <p class="font-mynerve gold subtitle">Discover Your Perfect<br>Summer Style</p>
-                <a onclick="openShop()" class="btn-blue">SHOP ALL</a>
-                <!-- IMAGINE MIC STÂNGA (hero-small-left) — schimbă src mai jos sau în js/main.js -->
-                <img id="hero-small-left" src="../Assets/images/foto2.jpg" alt="Man on beach" class="img-small mt-large" onclick="openLightbox(this)">
-            </div>
-            <div class="image-col">
-                <!-- IMAGINE MARE STÂNGA (hero-large-left) — schimbă src mai jos sau în js/main.js -->
-                <img id="hero-large-left" src="../Assets/images/foto1.jpg" alt="Woman in boho outfit" class="img-large" onclick="openLightbox(this)">
-            </div>
-        </section>
-
-        <!-- Secțiunea 2: New Arrivals -->
-        <section class="asymmetric-section">
-            <div class="image-col">
-                <!-- IMAGINE MARE DREAPTA (hero-large-right) — schimbă src mai jos sau în js/main.js -->
-                <img id="hero-large-right" src="../Assets/images/foto3.jpg" alt="Woman in blue shirt" class="img-large" onclick="openLightbox(this)">
-            </div>
-            <div class="content-col right-content">
-                <h2 class="font-mynerve gold title-huge">New Arrivals<br>for Sunny<br>Days</h2>
-                <p class="font-mynerve gold subtitle">Up to 30% Off for new<br>Selected Items</p>
-                <a href="#" class="btn-blue">NEW ARRIVALS</a>
-                <!-- IMAGINE MIC DREAPTA (hero-small-right) — schimbă src mai jos sau în js/main.js -->
-                <img id="hero-small-right" src="../Assets/images/foto4.jpg" alt="Man on boat" class="img-small mt-large" onclick="openLightbox(this)">
-            </div>
-        </section>
-
-        <!-- Secțiunea 3: Best Seller - Accessories -->
-        <section class="product-showcase">
-            <h2 class="font-mynerve gold title-center">Our Best Seller</h2>
-            <p class="label-category gold font-mynerve">ACCESSORIES</p>
-            <!-- IMAGINILE PENTRU ACCESSORIES sunt definite în js/main.js → IMAGES.accessories -->
-            <div class="four-col-grid" id="grid-accessories"></div>
-            <a href="#" class="btn-blue">ACCESSORIES</a>
-        </section>
-
-        <!-- Secțiunea 4: Beach -->
-        <section class="product-showcase">
-            <p class="label-category gold font-mynerve">BEACH</p>
-            <!-- IMAGINILE PENTRU BEACH sunt definite în js/main.js → IMAGES.beach -->
-            <div class="four-col-grid" id="grid-beach"></div>
-            <a href="#" class="btn-blue">BEACH</a>
-        </section>
-
-    </main>
-
-    <!-- ============ FOOTER ============ -->
-    <footer class="dark-footer">
-        <div class="footer-main">
-            <div class="footer-col">
-                <h3>HERE TO HELP</h3>
-                <ul>
-                    <li>Help &amp; Contact Us</li>
-                    <li>Our Stories</li>
-                    <li>Accessibility In Our Stores</li>
-                    <li>Product Recalls</li>
-                    <li>Sitemap</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>DELIVERY &amp; RETURNS</h3>
-                <ul>
-                    <li>Where's my order?</li>
-                    <li>Delivery &amp; Collection</li>
-                    <li>Return &amp; Refunds</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>SHOPPING WITH US</h3>
-                <ul>
-                    <li>Sparks</li>
-                    <li>Sparks FAQs</li>
-                    <li>Gift Card Balance</li>
-                    <li>Size Guides</li>
-                    <li>Sustainability</li>
-                </ul>
-            </div>
-            <div class="footer-col social-area">
-                <div class="social-icons">
-                    <!-- Facebook -->
-                    <a href="#" class="social-btn" aria-label="Facebook">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                    </a>
-                    <!-- Twitter / X -->
-                    <a href="#" class="social-btn" aria-label="Twitter">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-                    </a>
-                    <!-- YouTube -->
-                    <a href="#" class="social-btn" aria-label="YouTube">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
-                    </a>
-                    <!-- Instagram -->
-                    <a href="#" class="social-btn" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                    </a>
-                </div>
-                <p class="secure-payment">Secure Payment</p>
-            </div>
+    </div>
+    <div class="overlay-body shop-content">
+        <aside class="shop-sidebar">
+            <div class="breadcrumb"><span onclick="closeShop()" style="cursor:pointer;">Home</span><span class="breadcrumb-sep">|</span><span>Shop all</span></div>
+            <div class="sidebar-title">Shop by:</div>
+            <ul class="sidebar-filters">
+                <li class="active" onclick="filterProducts(this,'all')">Clothing</li>
+                <li onclick="filterProducts(this,'accessories')">Accessories</li>
+                <li onclick="filterProducts(this,'dresses')">Dresses</li>
+                <li onclick="filterProducts(this,'jeans')">Jeans</li>
+                <li onclick="filterProducts(this,'shoes')">Shoes</li>
+            </ul>
+        </aside>
+        <div class="shop-main">
+            <h1 class="shop-title">Shop all</h1>
+            <p class="shop-desc">New and Now: Check out the latest arrivals in our collection of clothes, shoes, accessories, and more</p>
+            <div class="products-grid" id="productsGrid"></div>
+            <div class="show-more-wrap"><a class="btn-blue">SHOW MORE</a></div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2026 MOMENT [MD]</p>
-            <div class="legal-links">
-                <span>Terms &amp; Conditions</span>
-                <span>Privacy</span>
-                <span>Cookies</span>
-                <span>Accessibility</span>
-                <span>Modern Slavery Act</span>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     OVERLAY: PRODUCT PAGE
+════════════════════════════════════════════════ -->
+<div class="page-overlay" id="productOverlay">
+    <div class="overlay-header">
+        <nav class="nav-container" style="position:relative;">
+            <div class="logo-center"><a onclick="closeAll()" style="cursor:pointer;"><img src="../Assets/logo.png" alt="SUNSET Logo"></a></div>
+            <button class="overlay-back" onclick="closeProd()">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Shop
+            </button>
+            <button class="overlay-close" onclick="closeProd()">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>CLOSE
+            </button>
+        </nav>
+    </div>
+    <div class="overlay-body prod-overlay-body">
+        <div class="product-gallery">
+            <div class="thumb-col"><img id="po-thumb" src="" alt="" class="thumb active" onclick="setMainProd(this)"></div>
+            <div class="main-img-wrap"><img id="po-main" src="" alt=""></div>
+        </div>
+        <div class="product-details">
+            <h1 class="product-title" id="po-name"></h1>
+            <div class="stars" id="po-stars">
+                <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
             </div>
-        </div>
-    </footer>
-
-    <!-- ============ SHOP ALL OVERLAY ============ -->
-    <div class="shop-overlay" id="shopOverlay">
-
-        <div class="shop-header">
-            <nav class="nav-container">
-                <div class="nav-links">
-                    <a onclick="openShop()" style="font-weight:700;">SHOP ALL</a>
-                    <a href="index.html?shop=1" onclick="setTimeout(()=>{openShop();filterCategory('all')},100)">NEW ARRIVALS</a>
-                    <a href="#" onclick="openShop();setTimeout(()=>filterCategory('accessories'),100)">ACCESSORIES</a>
-                    <a href="#" onclick="openShop();setTimeout(()=>filterCategory('beach'),100)">BEACH</a>
-                    <a href="#" onclick="openShop();setTimeout(()=>filterCategory('dresses'),100)">DRESSES</a>
-                </div>
-                <div class="logo-center">
-                    <a href="index.html" title="Acasă" onclick="closeShop()">
-                        <img src="../Assets/logo.png" alt="SUNSET Logo">
-                    </a>
-                </div>
-                <div class="nav-right">
-                    <button class="btn-close" onclick="closeShop()">
-                        <svg viewBox="0 0 24 24">
-                            <line x1="18" y1="6" x2="6" y2="18"/>
-                            <line x1="6" y1="6" x2="18" y2="18"/>
-                        </svg>
-                        CLOSE
-                    </button>
-                </div>
-            </nav>
-        </div>
-
-        <div class="shop-content">
-            <aside class="shop-sidebar">
-                <div class="breadcrumb">
-                    <span onclick="closeShop()">Home</span>
-                    <span class="breadcrumb-sep">|</span>
-                    <span>Shop all</span>
-                </div>
-                <div class="sidebar-title">Shop by:</div>
-                <ul class="sidebar-filters">
-                    <li class="active" onclick="filterProducts(this, 'all')">Clothing</li>
-                    <li onclick="filterProducts(this, 'accessories')">Accessories</li>
-                    <li onclick="filterProducts(this, 'dresses')">Dresses</li>
-                    <li onclick="filterProducts(this, 'jeans')">Jeans</li>
-                    <li onclick="filterProducts(this, 'shoes')">Shoes</li>
-                </ul>
-            </aside>
-
-            <div class="shop-main">
-                <h1 class="shop-title">Shop all</h1>
-                <p class="shop-desc">New and Now: Check out the latest arrivals in our collection of clothes, shoes, accessories, and more</p>
-                <!-- PRODUSELE sunt definite în js/main.js → PRODUCTS -->
-                <div class="products-grid" id="productsGrid"></div>
-                <div class="show-more-wrap">
-                    <a class="btn-blue">SHOW MORE</a>
-                </div>
+            <p class="product-price-big" id="po-price"></p>
+            <div class="divider"></div>
+            <p class="detail-label">Color</p>
+            <div class="color-swatches"><span class="swatch active" id="po-swatch"></span></div>
+            <div class="divider"></div>
+            <p class="detail-label">Quantity*</p>
+            <div class="qty-control">
+                <button class="qty-btn" onclick="changeProdQty(-1)">&#8722;</button>
+                <span id="po-qty">1</span>
+                <button class="qty-btn" onclick="changeProdQty(1)">&#43;</button>
             </div>
+            <button class="btn-add-to-bag" onclick="doProdAddToCart()">ADD TO BAG</button>
         </div>
+    </div>
+</div>
 
-        <!-- Footer în Shop Overlay -->
-        <footer class="dark-footer">
-            <div class="footer-main">
-                <div class="footer-col">
-                    <h3>HERE TO HELP</h3>
-                    <ul>
-                        <li>Help &amp; Contact Us</li>
-                        <li>Our Stories</li>
-                        <li>Accessibility In Our Stores</li>
-                        <li>Product Recalls</li>
-                        <li>Sitemap</li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>DELIVERY &amp; RETURNS</h3>
-                    <ul>
-                        <li>Where's my order?</li>
-                        <li>Delivery &amp; Collection</li>
-                        <li>Return &amp; Refunds</li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>SHOPPING WITH US</h3>
-                    <ul>
-                        <li>Sparks</li>
-                        <li>Sparks FAQs</li>
-                        <li>Gift Card Balance</li>
-                        <li>Size Guides</li>
-                        <li>Sustainability</li>
-                    </ul>
-                </div>
-                <div class="footer-col social-area">
-                    <div class="social-icons">
-                        <a href="#" class="social-btn" aria-label="Facebook">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                        </a>
-                        <a href="#" class="social-btn" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-                        </a>
-                        <a href="#" class="social-btn" aria-label="YouTube">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
-                        </a>
-                        <a href="#" class="social-btn" aria-label="Instagram">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                        </a>
+<!-- ════════════════════════════════════════════════
+     OVERLAY: CART
+════════════════════════════════════════════════ -->
+<div class="page-overlay" id="cartOverlay">
+    <div class="overlay-header">
+        <nav class="nav-container" style="position:relative;">
+            <div class="logo-center"><a onclick="closeAll()" style="cursor:pointer;"><img src="../Assets/logo.png" alt="SUNSET Logo"></a></div>
+            <button class="overlay-back" onclick="closeCart()">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Continue Shopping
+            </button>
+            <button class="overlay-close" onclick="closeCart()">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>CLOSE
+            </button>
+        </nav>
+    </div>
+    <div class="overlay-body cart-overlay-body">
+        <h1 class="cart-title font-mynerve gold">My Bag</h1>
+        <div class="cart-empty" id="cartEmpty" style="display:none;flex-direction:column;align-items:center;padding:60px 0;gap:18px;text-align:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C09E44" stroke-width="1" width="64" height="64"><path d="M6 10V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6M3 10h18l-1.5 10H4.5L3 10z"/></svg>
+            <p style="font-size:17px;color:#888;font-family:'Noto Sans',sans-serif;">Your bag is empty</p>
+            <a onclick="closeCart();openShop()" class="btn-blue" style="cursor:pointer;">START SHOPPING</a>
+        </div>
+        <div class="cart-layout" id="cartLayout" style="display:none;">
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-summary">
+                <h2 class="summary-title">Order Summary</h2>
+                <div class="summary-row"><span>Subtotal</span><span id="summarySubtotal">$0.00</span></div>
+                <div class="summary-row"><span>Delivery</span><span id="summaryDelivery">$9.99</span></div>
+                <div class="summary-row summary-promo">
+                    <span>Promo Code</span>
+                    <div class="promo-wrap">
+                        <input type="text" id="promoInput" placeholder="Enter code">
+                        <button onclick="applyPromo()">APPLY</button>
                     </div>
-                    <p class="secure-payment">Secure Payment</p>
                 </div>
+                <p class="promo-msg" id="promoMsg"></p>
+                <div class="summary-divider"></div>
+                <div class="summary-row summary-total"><span>Total</span><span id="summaryTotal">$0.00</span></div>
+                <button class="btn-checkout" onclick="openCheckoutModal()">PROCEED TO CHECKOUT</button>
+                <p class="summary-note">Free delivery on orders over $100</p>
             </div>
-            <div class="footer-bottom">
-                <p>© 2026 MOMENT [MD]</p>
-                <div class="legal-links">
-                    <span>Terms &amp; Conditions</span>
-                    <span>Privacy</span>
-                    <span>Cookies</span>
-                    <span>Accessibility</span>
-                    <span>Modern Slavery Act</span>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <!-- ============ LIGHTBOX ============ -->
-    <div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
-        <button class="lightbox-prev" onclick="lightboxNav(-1)">&#8592;</button>
-        <div class="lightbox-inner">
-            <button class="lightbox-close" onclick="closeLightbox()">&#215;</button>
-            <img id="lightboxImg" src="" alt="">
         </div>
-        <button class="lightbox-next" onclick="lightboxNav(1)">&#8594;</button>
     </div>
+</div>
 
-    <script src="../js/index.js"></script>
-    <script src="../js/cart.js"></script>
-    <script>
-        /* Închide search dropdown la click în afară */
-        document.addEventListener('click', function(e) {
-            const sc = document.getElementById('searchContainer');
-            if (sc && !sc.contains(e.target)) closeSearch();
-        });
-        /* Badge coș */
-        document.addEventListener('DOMContentLoaded', updateCartBadge);
-    </script>
+<!-- ════════════════════════════════════════════════
+     OVERLAY: ACCOUNT
+════════════════════════════════════════════════ -->
+<div class="page-overlay" id="accountOverlay">
+    <div class="overlay-header">
+        <nav class="nav-container" style="position:relative;">
+            <div class="logo-center"><a onclick="closeAll()" style="cursor:pointer;"><img src="../Assets/logo.png" alt="SUNSET Logo"></a></div>
+            <button class="overlay-close" onclick="closeAccount()">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>CLOSE
+            </button>
+        </nav>
+    </div>
+    <div class="overlay-body account-overlay-body">
+        <div class="acc-tabs">
+            <button class="acc-tab active" onclick="showAccTab('login')">Sign In</button>
+            <button class="acc-tab" onclick="showAccTab('register')">Create Account</button>
+        </div>
+        <!-- LOGIN -->
+        <div id="acc-login">
+            <h1 class="acc-title font-mynerve gold">Welcome Back</h1>
+            <p class="acc-sub">Sign in to your SUNSET account</p>
+            <div class="acc-form" id="loginForm">
+                <div class="form-group"><label>Email Address</label><input type="email" id="loginEmail" placeholder="your@email.com"></div>
+                <div class="form-group"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••"></div>
+                <p class="form-error" id="loginError"></p>
+                <button class="btn-acc-submit" onclick="doLogin()">SIGN IN</button>
+                <p class="acc-switch">Don't have an account? <a onclick="showAccTab('register')">Create one</a></p>
+            </div>
+            <div class="acc-profile" id="profilePanel" style="display:none;">
+                <div class="profile-avatar" id="profileAvatar">S</div>
+                <h2 class="profile-name" id="profileName">Sunset User</h2>
+                <p class="profile-email" id="profileEmail"></p>
+                <div class="profile-grid">
+                    <div class="profile-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><p class="pc-label">Orders</p><p class="pc-val" id="profileOrders">0</p></div>
+                    <div class="profile-card" onclick="closeAccount();openCart()" style="cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M6 10V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6M3 10h18l-1.5 10H4.5L3 10z"/></svg><p class="pc-label">In Bag</p><p class="pc-val" id="profileCart">0</p></div>
+                    <div class="profile-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><p class="pc-label">Wishlist</p><p class="pc-val">0</p></div>
+                </div>
+                <div class="profile-details">
+                    <h3>Personal Details</h3>
+                    <div class="form-group"><label>Full Name</label><input type="text" id="editName" placeholder="Your name"></div>
+                    <div class="form-group"><label>Phone</label><input type="text" id="editPhone" placeholder="+373 XXX XXX XXX"></div>
+                    <div class="form-group"><label>Address</label><input type="text" id="editAddress" placeholder="Street, City, Country"></div>
+                    <button class="btn-acc-submit" onclick="saveProfile()">SAVE CHANGES</button>
+                    <button class="btn-acc-outline" onclick="doLogout()">SIGN OUT</button>
+                </div>
+            </div>
+        </div>
+        <!-- REGISTER -->
+        <div id="acc-register" style="display:none;">
+            <h1 class="acc-title font-mynerve gold">Join SUNSET</h1>
+            <p class="acc-sub">Create your account and start shopping</p>
+            <div class="acc-form">
+                <div class="form-group"><label>Full Name</label><input type="text" id="regName" placeholder="Your full name"></div>
+                <div class="form-group"><label>Email Address</label><input type="email" id="regEmail" placeholder="your@email.com"></div>
+                <div class="form-group"><label>Password</label><input type="password" id="regPass" placeholder="Min. 6 characters"></div>
+                <p class="form-error" id="regError"></p>
+                <button class="btn-acc-submit" onclick="doRegister()">CREATE ACCOUNT</button>
+                <p class="acc-switch">Already have an account? <a onclick="showAccTab('login')">Sign in</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     OVERLAY: ABOUT
+════════════════════════════════════════════════ -->
+<div class="page-overlay" id="aboutOverlay">
+    <div class="overlay-header">
+        <nav class="nav-container" style="position:relative;">
+            <div class="logo-center"><a onclick="closeAll()" style="cursor:pointer;"><img src="../Assets/logo.png" alt="SUNSET Logo"></a></div>
+            <button class="overlay-close" onclick="closeAbout()">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>CLOSE
+            </button>
+        </nav>
+    </div>
+    <div class="overlay-body about-page-body">
+        <div class="about-hero"><h1 class="font-mynerve gold">About Us</h1><p>We believe summer is a feeling — and we're here to help you wear it.</p></div>
+        <div class="about-grid">
+            <div class="about-img-ph"><svg viewBox="0 0 120 120" width="70" height="70" fill="none"><circle cx="60" cy="60" r="55" stroke="#C09E44" stroke-width="1.5"/><path d="M60 20 L60 100 M20 60 L100 60" stroke="#C09E44" stroke-width="1"/><circle cx="60" cy="60" r="20" stroke="#C09E44" stroke-width="1.5"/></svg></div>
+            <div class="about-text"><h2>Our Story</h2><p>SUNSET was born from a love of long summer days, warm light, and effortless style. Founded in 2024, we set out to create a curated fashion destination that captures the spirit of the season.</p><p>Every piece in our collection is chosen with care — from breezy beach essentials to statement accessories that travel from the shore to the city.</p></div>
+        </div>
+        <div class="about-grid reverse">
+            <div class="about-img-ph"><svg viewBox="0 0 120 120" width="70" height="70" fill="none"><path d="M30 90 Q60 30 90 90" stroke="#C09E44" stroke-width="1.5"/><circle cx="60" cy="55" r="15" stroke="#C09E44" stroke-width="1.5"/><line x1="60" y1="20" x2="60" y2="40" stroke="#C09E44" stroke-width="1.5"/></svg></div>
+            <div class="about-text"><h2>Our Mission</h2><p>To make summer style accessible, inspiring, and joyful for everyone. We curate collections that blend contemporary trends with timeless warmth — clothes that make you feel confident, free, and completely yourself.</p><p>Sustainability is at the heart of what we do. We partner with responsible suppliers and choose natural fabrics wherever possible.</p></div>
+        </div>
+        <div class="about-values">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Quality First</h3><p>Every item is carefully selected for quality, comfort, and lasting style.</p></div>
+                <div class="value-card"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>Made with Love</h3><p>From design to delivery, every detail is handled with passion.</p></div>
+                <div class="value-card"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3>Sustainability</h3><p>We choose natural materials and ethical partners to protect the planet.</p></div>
+            </div>
+        </div>
+        <div style="text-align:center;margin-bottom:50px;">
+            <h2 style="font-family:'Mynerve',cursive;font-size:46px;color:#C09E44;margin-bottom:36px;">Meet the Team</h2>
+            <div class="team-grid">
+                <div class="team-card"><div class="team-avatar">A</div><p class="team-name">Arsen</p><p class="team-role">Founder & Developer</p></div>
+                <div class="team-card"><div class="team-avatar">S</div><p class="team-name">Sofia</p><p class="team-role">Creative Director</p></div>
+                <div class="team-card"><div class="team-avatar">M</div><p class="team-name">Maria</p><p class="team-role">Head of Style</p></div>
+            </div>
+        </div>
+        <div class="about-cta"><h2>Ready to Shop?</h2><p>Discover our latest summer collection and find your perfect look.</p><a onclick="closeAbout();openShop()" class="btn-blue" style="cursor:pointer;">SHOP NOW</a></div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     OVERLAY: INFO PAGES (footer links)
+════════════════════════════════════════════════ -->
+<div class="page-overlay" id="infoOverlay">
+    <div class="overlay-header">
+        <nav class="nav-container" style="position:relative;">
+            <div class="logo-center"><a onclick="closeAll()" style="cursor:pointer;"><img src="../Assets/logo.png" alt="SUNSET Logo"></a></div>
+            <button class="overlay-back" id="infoBackBtn" onclick="closeInfo()">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back
+            </button>
+            <button class="overlay-close" onclick="closeInfo()">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>CLOSE
+            </button>
+        </nav>
+    </div>
+    <div class="overlay-body info-page-body" id="infoBody"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     LIGHTBOX
+════════════════════════════════════════════════ -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+    <button class="lightbox-prev" onclick="lightboxNav(-1)">&#8592;</button>
+    <div class="lightbox-inner">
+        <button class="lightbox-close" onclick="closeLightbox()">&#215;</button>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+    <button class="lightbox-next" onclick="lightboxNav(1)">&#8594;</button>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     CHECKOUT MODAL
+════════════════════════════════════════════════ -->
+<div class="checkout-overlay" id="checkoutOverlay" style="display:none;">
+    <div class="checkout-modal">
+        <button class="checkout-close" onclick="closeCheckoutModal()">&#215;</button>
+        <h2 class="font-mynerve gold">Checkout</h2>
+        <p class="checkout-sub">Complete your order details</p>
+        <div id="step1chk">
+            <h3 style="font-size:13px;font-weight:600;color:#C09E44;text-transform:uppercase;letter-spacing:.5px;margin-bottom:18px;font-family:'Noto Sans',sans-serif;">1. Delivery Details</h3>
+            <div class="form-group"><label>Full Name</label><input type="text" id="chkName" placeholder="Your full name"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="chkEmail" placeholder="your@email.com"></div>
+            <div class="form-group"><label>Phone</label><input type="text" id="chkPhone" placeholder="+373 XXX XXX XXX"></div>
+            <div class="form-group"><label>Address</label><input type="text" id="chkAddress" placeholder="Street, City, Country"></div>
+            <button class="btn-acc-submit" onclick="goChkStep2()">CONTINUE TO PAYMENT</button>
+        </div>
+        <div id="step2chk" style="display:none;">
+            <h3 style="font-size:13px;font-weight:600;color:#C09E44;text-transform:uppercase;letter-spacing:.5px;margin-bottom:18px;font-family:'Noto Sans',sans-serif;">2. Payment Method</h3>
+            <div class="payment-methods">
+                <label class="pay-option"><input type="radio" name="pay" value="card" checked onchange="document.getElementById('cardFields').style.display='block'"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Credit / Debit Card</span></label>
+                <label class="pay-option"><input type="radio" name="pay" value="paypal" onchange="document.getElementById('cardFields').style.display='none'"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M7 11.5C7 14 9 16 12 16h1c3 0 5-2 5-4.5S16 7 13 7h-2C8 7 7 9 7 11.5z"/></svg>PayPal</span></label>
+                <label class="pay-option"><input type="radio" name="pay" value="cash" onchange="document.getElementById('cardFields').style.display='none'"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>Cash on Delivery</span></label>
+            </div>
+            <div id="cardFields">
+                <div class="form-group"><label>Card Number</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="this.value=this.value.replace(/\D/g,'').replace(/(.{4})/g,'$1 ').trim().slice(0,19)"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                    <div class="form-group"><label>Expiry</label><input type="text" placeholder="MM/YY" maxlength="5" oninput="this.value=this.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'$1/$2').slice(0,5)"></div>
+                    <div class="form-group"><label>CVV</label><input type="text" placeholder="123" maxlength="3"></div>
+                </div>
+            </div>
+            <button class="btn-acc-submit" onclick="placeOrder()">PLACE ORDER — <span id="finalTotal">$0.00</span></button>
+            <button class="btn-acc-outline" onclick="document.getElementById('step2chk').style.display='none';document.getElementById('step1chk').style.display='block';">← Back</button>
+        </div>
+        <div id="stepSuccess" style="display:none;text-align:center;padding:20px 0;">
+            <div style="width:72px;height:72px;border-radius:50%;background:#2d8a4e;color:#fff;font-size:32px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">✓</div>
+            <h2 class="font-mynerve gold">Order Placed!</h2>
+            <p style="font-size:14px;color:#555;font-family:'Noto Sans',sans-serif;margin:12px 0 6px;">Thank you! Your order has been received.</p>
+            <p style="font-size:13px;color:#C09E44;font-weight:600;font-family:'Noto Sans',sans-serif;">Order #<span id="orderNum"></span></p>
+            <button class="btn-blue" onclick="closeCheckoutModal();closeCart();" style="margin-top:24px;border:none;cursor:pointer;">CONTINUE SHOPPING</button>
+        </div>
+    </div>
+</div>
+
+<script src="../js/index.js"></script>
+<script src="../js/cart.js"></script>
+<script>
+
+/* ═══════════ OVERLAY OPEN / CLOSE ═══════════ */
+const overlays = ['shopOverlay','productOverlay','cartOverlay','accountOverlay','aboutOverlay','infoOverlay'];
+
+function openOverlay(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById(id).scrollTop = 0;
+}
+function closeOverlay(id) {
+    document.getElementById(id).classList.remove('open');
+    if (!overlays.some(o => document.getElementById(o).classList.contains('open')))
+        document.body.style.overflow = '';
+}
+function closeAll() {
+    overlays.forEach(o => document.getElementById(o).classList.remove('open'));
+    document.body.style.overflow = '';
+}
+
+function openShop()    { openOverlay('shopOverlay'); }
+function closeShop()   { closeOverlay('shopOverlay'); }
+function openCart()    { renderCart(); openOverlay('cartOverlay'); }
+function closeCart()   { closeOverlay('cartOverlay'); }
+function openAccount() { loadProfile(); openOverlay('accountOverlay'); }
+function closeAccount(){ closeOverlay('accountOverlay'); }
+function openAbout()   { openOverlay('aboutOverlay'); }
+function closeAbout()  { closeOverlay('aboutOverlay'); }
+function openInfo()    { openOverlay('infoOverlay'); }
+function closeInfo()   { closeOverlay('infoOverlay'); }
+
+function openProd(p) {
+    document.getElementById('po-main').src  = p.src;
+    document.getElementById('po-main').alt  = p.name;
+    document.getElementById('po-thumb').src = p.src;
+    document.getElementById('po-thumb').alt = p.name;
+    document.getElementById('po-name').textContent  = p.name;
+    document.getElementById('po-price').textContent = p.price;
+    document.getElementById('po-swatch').style.background = p.color || '#C09E44';
+    document.getElementById('po-qty').textContent = '1';
+    document.querySelectorAll('#po-stars .star').forEach(s => s.classList.remove('filled'));
+    window._currentProd = p;
+    openOverlay('productOverlay');
+}
+function closeProd() { closeOverlay('productOverlay'); }
+
+function setMainProd(el) {
+    document.querySelectorAll('#productOverlay .thumb').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('po-main').src = el.src;
+}
+function changeProdQty(d) {
+    const el = document.getElementById('po-qty');
+    let v = parseInt(el.textContent) + d;
+    if (v < 1) v = 1;
+    el.textContent = v;
+}
+function doProdAddToCart() {
+    const p = window._currentProd;
+    if (!p) return;
+    addToCart({ src:p.src, name:p.name, price:p.price, color:p.color||'#C09E44', qty: parseInt(document.getElementById('po-qty').textContent)||1 });
+}
+
+/* ── Product rating stars ── */
+document.querySelectorAll('#po-stars .star').forEach((star,i) => {
+    star.addEventListener('click', () => {
+        document.querySelectorAll('#po-stars .star').forEach((s,j) => s.classList.toggle('filled', j<=i));
+    });
+});
+
+/* ── Override buildProductsGrid to open product overlay ── */
+const _origBuild = buildProductsGrid;
+function buildProductsGrid() {
+    const grid = document.getElementById('productsGrid');
+    if (!grid) return;
+    const counts = {};
+    const filtered = PRODUCTS.filter(p => { counts[p.cat]=(counts[p.cat]||0)+1; return counts[p.cat]<=8; });
+    grid.innerHTML = filtered.map(p => {
+        const pj = encodeURIComponent(JSON.stringify({src:p.src,name:p.name,price:p.price,color:p.color||'#C09E44',cat:p.cat,badge:p.badge}));
+        return `<div class="product-card" data-cat="${p.cat}" onclick="openProd(JSON.parse(decodeURIComponent('${pj}')))">
+            <div class="product-img-wrap">
+                <img src="${p.src}" alt="${p.alt}">
+                ${p.badge?`<span class="product-badge">${p.badge}</span>`:''}
+            </div>
+            <p class="product-name">${p.name}</p>
+            <p class="product-price">${p.price}</p>
+        </div>`;
+    }).join('');
+    applyFilter('all');
+}
+
+/* ── Override search to open product overlay ── */
+function handleSearch(query) {
+    const dropdown = document.getElementById('searchDropdown');
+    const results  = document.getElementById('searchResults');
+    const hint     = document.getElementById('searchHint');
+    const q = query.trim().toLowerCase();
+    dropdown.classList.add('open');
+    if (!q) { hint.style.display='block'; results.innerHTML=''; return; }
+    hint.style.display='none';
+    const matches = PRODUCTS.filter(p => p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)||p.badge.toLowerCase().includes(q));
+    if (!matches.length) { results.innerHTML=`<div class="search-no-results">No results for "<strong>${q}</strong>"<span>Try a different keyword</span></div>`; return; }
+    const catLabel = {all:'Clothing',accessories:'Accessories',dresses:'Dresses',jeans:'Jeans',shoes:'Shoes'};
+    const hl = t => t.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<mark style="background:#FFF3C4;border-radius:2px;padding:0 1px;">$1</mark>');
+    results.innerHTML = `<div class="search-count">${matches.length} result${matches.length!==1?'s':''} found</div>` +
+        matches.slice(0,8).map(p => `
+        <div class="search-result-item" onclick="closeSearch();openProd(${JSON.stringify({src:p.src,name:p.name,price:p.price,color:p.color||'#C09E44'}).replace(/"/g,'&quot;')})">
+            <img class="search-result-img" src="${p.src}" alt="${p.name}" onerror="this.style.background='#EDE8DF'">
+            <div class="search-result-info">
+                <div class="search-result-name">${hl(p.name)}</div>
+                <div class="search-result-cat">${catLabel[p.cat]||p.cat}</div>
+                <div class="search-result-price">${p.price}</div>
+            </div>
+            ${p.badge?`<span class="search-result-badge">${p.badge}</span>`:''}
+        </div>`).join('');
+}
+function closeSearch() {
+    const d=document.getElementById('searchDropdown'); const i=document.getElementById('searchInput');
+    if(d) d.classList.remove('open'); if(i) i.value='';
+}
+function escRegex(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+
+/* ═══════════ CART ═══════════ */
+let promoApplied = false;
+const DELIVERY = 9.99;
+
+function renderCart() {
+    const cart = getCart();
+    const empty  = document.getElementById('cartEmpty');
+    const layout = document.getElementById('cartLayout');
+    const items  = document.getElementById('cartItems');
+    if (!cart.length) { empty.style.display='flex'; layout.style.display='none'; return; }
+    empty.style.display='none'; layout.style.display='grid';
+    items.innerHTML = cart.map((item,i) => `
+        <div class="cart-item">
+            <img src="${item.src}" alt="${item.name}" class="cart-item-img" onerror="this.style.background='#EDE8DF'">
+            <div class="cart-item-info">
+                <p class="ci-name">${item.name}</p>
+                <div class="ci-color-wrap"><span class="ci-swatch" style="background:${item.color||'#C09E44'}"></span></div>
+                <p class="ci-price">${item.price}</p>
+            </div>
+            <div class="cart-item-right">
+                <div class="ci-qty">
+                    <button onclick="cQty(${i},${(item.qty||1)-1})">−</button>
+                    <span>${item.qty||1}</span>
+                    <button onclick="cQty(${i},${(item.qty||1)+1})">+</button>
+                </div>
+                <button class="ci-remove" onclick="cRemove(${i})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>
+                <p class="ci-subtotal">$${(parseFloat((item.price||'$0').replace(/[^0-9.]/g,''))*(item.qty||1)).toFixed(2)}</p>
+            </div>
+        </div>`).join('');
+    updateSummary();
+}
+function cQty(i,q) { updateCartQty(i,q); renderCart(); }
+function cRemove(i) { removeFromCart(i); renderCart(); }
+function updateSummary() {
+    const sub = getCartTotal();
+    const del = sub>=100?0:DELIVERY;
+    const dis = promoApplied?sub*.1:0;
+    const tot = sub-dis+del;
+    document.getElementById('summarySubtotal').textContent = '$'+sub.toFixed(2);
+    document.getElementById('summaryDelivery').textContent = del===0?'FREE':'$'+del.toFixed(2);
+    document.getElementById('summaryTotal').textContent    = '$'+tot.toFixed(2);
+    document.getElementById('finalTotal').textContent      = '$'+tot.toFixed(2);
+}
+function applyPromo() {
+    const code = document.getElementById('promoInput').value.trim().toUpperCase();
+    const msg  = document.getElementById('promoMsg');
+    if (code==='SUNSET10') { promoApplied=true; msg.textContent='✓ 10% discount applied!'; msg.style.color='#2d8a4e'; }
+    else { msg.textContent='Invalid promo code.'; msg.style.color='#c0392b'; }
+    updateSummary();
+}
+function openCheckoutModal() {
+    const raw = localStorage.getItem('sunset_user');
+    if (raw) { const u=JSON.parse(raw); document.getElementById('chkName').value=u.name||''; document.getElementById('chkEmail').value=u.email||''; document.getElementById('chkPhone').value=u.phone||''; document.getElementById('chkAddress').value=u.address||''; }
+    document.getElementById('checkoutOverlay').style.display='flex';
+    document.body.style.overflow='hidden';
+}
+function closeCheckoutModal() {
+    document.getElementById('checkoutOverlay').style.display='none';
+    document.getElementById('step1chk').style.display='block';
+    document.getElementById('step2chk').style.display='none';
+    document.getElementById('stepSuccess').style.display='none';
+}
+function goChkStep2() {
+    if (!document.getElementById('chkName').value.trim()) { alert('Please enter your name.'); return; }
+    if (!document.getElementById('chkEmail').value.includes('@')) { alert('Please enter a valid email.'); return; }
+    document.getElementById('step1chk').style.display='none';
+    document.getElementById('step2chk').style.display='block';
+}
+function placeOrder() {
+    const raw=localStorage.getItem('sunset_user');
+    if (raw) { const u=JSON.parse(raw); u.orders=(u.orders||0)+1; localStorage.setItem('sunset_user',JSON.stringify(u)); }
+    localStorage.removeItem('sunset_cart');
+    document.getElementById('step2chk').style.display='none';
+    document.getElementById('stepSuccess').style.display='block';
+    document.getElementById('orderNum').textContent=Math.floor(Math.random()*90000+10000);
+    updateCartBadge();
+}
+
+/* ═══════════ ACCOUNT ═══════════ */
+function showAccTab(id) {
+    document.getElementById('acc-login').style.display   = id==='login'?'block':'none';
+    document.getElementById('acc-register').style.display= id==='register'?'block':'none';
+    document.querySelectorAll('.acc-tab').forEach((t,i)=>t.classList.toggle('active', (id==='login'&&i===0)||(id==='register'&&i===1)));
+}
+function doRegister() {
+    const name=document.getElementById('regName').value.trim();
+    const email=document.getElementById('regEmail').value.trim();
+    const pass=document.getElementById('regPass').value;
+    const err=document.getElementById('regError');
+    if (!name){err.textContent='Please enter your name.';return;}
+    if (!email.includes('@')){err.textContent='Please enter a valid email.';return;}
+    if (pass.length<6){err.textContent='Password must be at least 6 characters.';return;}
+    err.textContent='';
+    localStorage.setItem('sunset_user',JSON.stringify({name,email,pass,phone:'',address:'',orders:0}));
+    localStorage.setItem('sunset_logged','1');
+    showAccTab('login'); loadProfile();
+}
+function doLogin() {
+    const email=document.getElementById('loginEmail').value.trim();
+    const pass=document.getElementById('loginPass').value;
+    const err=document.getElementById('loginError');
+    const raw=localStorage.getItem('sunset_user');
+    if (!raw){err.textContent='No account found. Please create one first.';return;}
+    const u=JSON.parse(raw);
+    if (u.email!==email||u.pass!==pass){err.textContent='Incorrect email or password.';return;}
+    err.textContent='';
+    localStorage.setItem('sunset_logged','1');
+    loadProfile();
+}
+function doLogout() {
+    localStorage.removeItem('sunset_logged');
+    document.getElementById('loginForm').style.display='block';
+    document.getElementById('profilePanel').style.display='none';
+    document.getElementById('loginEmail').value='';
+    document.getElementById('loginPass').value='';
+}
+function saveProfile() {
+    const raw=localStorage.getItem('sunset_user'); if (!raw) return;
+    const u=JSON.parse(raw);
+    u.name=document.getElementById('editName').value.trim()||u.name;
+    u.phone=document.getElementById('editPhone').value.trim();
+    u.address=document.getElementById('editAddress').value.trim();
+    localStorage.setItem('sunset_user',JSON.stringify(u));
+    document.getElementById('profileName').textContent=u.name;
+    document.getElementById('profileAvatar').textContent=u.name[0].toUpperCase();
+    const btn=document.querySelector('#profilePanel .btn-acc-submit');
+    const orig=btn.textContent; btn.textContent='✓ SAVED'; btn.style.background='#2d8a4e';
+    setTimeout(()=>{btn.textContent=orig;btn.style.background='';},1800);
+}
+function loadProfile() {
+    const raw=localStorage.getItem('sunset_user');
+    if (!raw||!localStorage.getItem('sunset_logged')) return;
+    const u=JSON.parse(raw);
+    document.getElementById('loginForm').style.display='none';
+    document.getElementById('profilePanel').style.display='block';
+    document.getElementById('profileName').textContent=u.name;
+    document.getElementById('profileEmail').textContent=u.email;
+    document.getElementById('profileAvatar').textContent=u.name[0].toUpperCase();
+    document.getElementById('profileOrders').textContent=u.orders||0;
+    document.getElementById('editName').value=u.name;
+    document.getElementById('editPhone').value=u.phone||'';
+    document.getElementById('editAddress').value=u.address||'';
+    try { const c=JSON.parse(localStorage.getItem('sunset_cart')||'[]'); document.getElementById('profileCart').textContent=c.reduce((s,i)=>s+(i.qty||1),0); } catch(e){}
+}
+
+/* ═══════════ INFO PAGES ═══════════ */
+const INFO_PAGES = {
+help: {title:'Help & Contact Us', sub:'We\'re here to help — reach out any time.', body:`
+<div class="contact-grid">
+<div class="contact-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><h3>Phone Support</h3><p>Mon–Fri: 09:00–18:00<br><a href="tel:+37322123456">+373 22 123 456</a></p></div>
+<div class="contact-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><h3>Email</h3><p>Response within 24 hours<br><a href="mailto:support@sunset.md">support@sunset.md</a></p></div>
+<div class="contact-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><h3>Live Chat</h3><p>Mon–Sun: 08:00–22:00<br>Available on website</p></div>
+<div class="contact-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><h3>Visit Us</h3><p>Str. Ștefan cel Mare 1<br>Chișinău, Moldova</p></div>
+</div>`},
+stories:{title:'Our Stories',sub:'Behind every collection, there\'s a story worth telling.',body:`<div class="info-section"><h2>Summer 2026 — Born from the Golden Hour</h2><p>The SUNSET Summer Collection was inspired by the magical light of a Mediterranean evening — warm tones, flowing silhouettes, and that feeling of complete freedom.</p></div><div class="info-section"><h2>How It All Started</h2><p>SUNSET was founded in 2024 with a simple idea: create a fashion brand that feels like a summer vacation. No rush, no compromise — just beautiful clothes made for real life.</p></div><div class="info-highlight"><p>"We don't just sell clothes. We sell the feeling of a perfect summer day."</p></div><div class="info-section"><h2>Sustainability Story</h2><p>In 2025, we committed to sourcing 80% of our fabrics from certified sustainable suppliers. Today, every linen piece comes from family-owned farms in Portugal and Ireland.</p></div>`},
+accessibility:{title:'Accessibility',sub:'SUNSET is committed to making fashion accessible to everyone.',body:`<div class="info-section"><h2>Our Commitment</h2><p>We work continuously to improve the accessibility of our website and physical stores for all customers, including those with disabilities.</p></div><div class="info-section"><h2>Website Accessibility</h2><ul><li>All images include descriptive alt text</li><li>The website supports keyboard-only navigation</li><li>Color contrast meets WCAG 2.1 AA standards</li><li>Font sizes can be adjusted using browser settings</li></ul></div><div class="info-section"><h2>In Our Stores</h2><ul><li>Wheelchair accessible entrances and fitting rooms</li><li>Staff trained to assist customers with disabilities</li><li>Large-print materials available on request</li></ul></div>`},
+recalls:{title:'Product Recalls',sub:'Safety is our top priority.',body:`<div class="info-highlight"><p>✓ No active product recalls at this time.</p></div><div class="info-section"><h2>Our Safety Standards</h2><p>All SUNSET products undergo rigorous quality and safety testing before reaching our customers. We comply with EU and Moldovan consumer product safety regulations.</p></div><div class="info-section"><h2>What to Do If You Have Concerns</h2><ul><li>Stop using the product immediately if you notice any defect</li><li>Contact us at <a href="mailto:safety@sunset.md" style="color:#448ADE">safety@sunset.md</a></li><li>Keep your proof of purchase for a full refund or exchange</li></ul></div>`},
+sitemap:{title:'Sitemap',sub:'Find everything on the SUNSET website.',body:`<div class="info-section"><h2>Main Pages</h2><ul><li><a onclick="closeInfo()" style="color:#448ADE;cursor:pointer;">Home</a></li><li><a onclick="closeInfo();openShop()" style="color:#448ADE;cursor:pointer;">Shop All</a></li><li><a onclick="closeInfo();openAbout()" style="color:#448ADE;cursor:pointer;">About Us</a></li><li><a onclick="closeInfo();openAccount()" style="color:#448ADE;cursor:pointer;">My Account</a></li><li><a onclick="closeInfo();openCart()" style="color:#448ADE;cursor:pointer;">My Bag</a></li></ul></div><div class="info-section"><h2>Help &amp; Support</h2><ul><li><a onclick="openInfoPage('help')" style="color:#448ADE;cursor:pointer;">Help &amp; Contact Us</a></li><li><a onclick="openInfoPage('tracking')" style="color:#448ADE;cursor:pointer;">Order Tracking</a></li><li><a onclick="openInfoPage('delivery')" style="color:#448ADE;cursor:pointer;">Delivery &amp; Collection</a></li><li><a onclick="openInfoPage('returns')" style="color:#448ADE;cursor:pointer;">Returns &amp; Refunds</a></li></ul></div><div class="info-section"><h2>Legal</h2><ul><li><a onclick="openInfoPage('terms')" style="color:#448ADE;cursor:pointer;">Terms &amp; Conditions</a></li><li><a onclick="openInfoPage('privacy')" style="color:#448ADE;cursor:pointer;">Privacy Policy</a></li><li><a onclick="openInfoPage('cookies')" style="color:#448ADE;cursor:pointer;">Cookie Policy</a></li></ul></div>`},
+tracking:{title:"Where's My Order?",sub:'Track your SUNSET order in real time.',body:`<div class="info-section"><h2>Track Your Order</h2><p>Enter your order number and email address to see the latest status of your delivery.</p><div style="display:flex;flex-direction:column;gap:14px;max-width:420px;margin-top:18px;"><div style="display:flex;flex-direction:column;gap:6px;"><label style="font-size:12px;font-weight:600;font-family:'Noto Sans',sans-serif;text-transform:uppercase;letter-spacing:.5px;">Order Number</label><input type="text" placeholder="e.g. 10234" style="border:1px solid #D8D0C0;border-radius:6px;padding:11px 14px;font-size:14px;font-family:'Noto Sans',sans-serif;outline:none;"></div><div style="display:flex;flex-direction:column;gap:6px;"><label style="font-size:12px;font-weight:600;font-family:'Noto Sans',sans-serif;text-transform:uppercase;letter-spacing:.5px;">Email Address</label><input type="email" placeholder="your@email.com" style="border:1px solid #D8D0C0;border-radius:6px;padding:11px 14px;font-size:14px;font-family:'Noto Sans',sans-serif;outline:none;"></div><button onclick="this.textContent='Tracking not found — demo mode'" style="background:#448ADE;color:#fff;border:none;border-radius:6px;padding:13px;font-size:13px;font-weight:600;font-family:'Noto Sans',sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">TRACK ORDER</button></div></div><div class="info-section"><h2>Delivery Timeframes</h2><ul><li>Standard: 3–5 business days — $9.99</li><li>Express: 1–2 business days — $19.99</li><li>Free delivery on orders over $100</li></ul></div>`},
+delivery:{title:'Delivery & Collection',sub:'Fast, reliable delivery to your door.',body:`<div class="info-section"><h2>Delivery Options</h2><ul><li><strong>Standard</strong> — 3–5 business days — $9.99</li><li><strong>Express</strong> — 1–2 business days — $19.99</li><li><strong>Free Standard</strong> — on orders over $100</li><li><strong>Click &amp; Collect</strong> — free, collect from our store within 2 hours</li></ul></div><div class="info-highlight"><p>📦 All orders are dispatched within 24 hours of being placed (Mon–Fri).</p></div><div class="info-section"><h2>International Shipping</h2><p>We ship to Romania, Moldova, Ukraine, and Bulgaria. International delivery takes 5–10 business days and costs $24.99.</p></div>`},
+returns:{title:'Returns & Refunds',sub:'Hassle-free returns within 30 days.',body:`<div class="info-highlight"><p>✓ Free returns within 30 days of purchase for all orders.</p></div><div class="info-section"><h2>How to Return an Item</h2><ul><li>Log in to your account and select the item to return</li><li>Print the prepaid return label sent to your email</li><li>Drop off the parcel at any post office</li><li>Your refund will be processed within 5–7 business days</li></ul></div><div class="info-section"><h2>Return Conditions</h2><ul><li>Items must be unworn, unwashed, and in original packaging</li><li>Tags must still be attached</li><li>Sale items are eligible for exchange only</li><li>Swimwear cannot be returned for hygiene reasons</li></ul></div>`},
+sparks:{title:'Sparks Loyalty Program',sub:'Earn rewards every time you shop.',body:`<div class="info-section"><h2>What is Sparks?</h2><p>Sparks is SUNSET's free loyalty program. Every time you shop, you earn points that can be redeemed for discounts on future orders.</p></div><div class="info-section"><h2>How to Earn Points</h2><ul><li>1 point for every $1 spent</li><li>50 bonus points when you create an account</li><li>100 bonus points on your birthday</li><li>25 points for writing a product review</li></ul></div><div class="info-section"><h2>Membership Tiers</h2><ul><li><strong>Bronze</strong> — 0–499 pts — 5% discount</li><li><strong>Silver</strong> — 500–1499 pts — 8% + early sale access</li><li><strong>Gold</strong> — 1500+ pts — 12% + free express delivery</li></ul></div><div class="info-highlight"><p>💛 Join today — create your account to start.</p></div>`},
+'sparks-faq':{title:'Sparks FAQs',sub:'Answers to your most common Sparks questions.',body:`<div class="info-section"><h2>How do I join Sparks?</h2><p>Simply create a free SUNSET account. You'll automatically be enrolled and receive 50 welcome points.</p></div><div class="info-section"><h2>When do my points expire?</h2><p>Sparks points are valid for 24 months from the date earned. Points expire if your account is inactive for 12 consecutive months.</p></div><div class="info-section"><h2>Can I use points and a promo code together?</h2><p>Yes! You can combine Sparks points with one promotional code per order.</p></div><div class="info-section"><h2>How do I check my points balance?</h2><p>Log in to your account and visit the Sparks section of your profile dashboard.</p></div>`},
+giftcard:{title:'Gift Card Balance',sub:'Check or redeem your SUNSET gift card.',body:`<div class="info-section"><h2>Check Your Balance</h2><div style="display:flex;flex-direction:column;gap:14px;max-width:360px;margin-top:18px;"><div style="display:flex;flex-direction:column;gap:6px;"><label style="font-size:12px;font-weight:600;font-family:'Noto Sans',sans-serif;text-transform:uppercase;letter-spacing:.5px;">Card Number</label><input type="text" placeholder="XXXX-XXXX-XXXX-XXXX" style="border:1px solid #D8D0C0;border-radius:6px;padding:11px 14px;font-size:14px;font-family:'Noto Sans',sans-serif;outline:none;"></div><div style="display:flex;flex-direction:column;gap:6px;"><label style="font-size:12px;font-weight:600;font-family:'Noto Sans',sans-serif;text-transform:uppercase;letter-spacing:.5px;">PIN</label><input type="text" placeholder="4-digit PIN" maxlength="4" style="border:1px solid #D8D0C0;border-radius:6px;padding:11px 14px;font-size:14px;font-family:'Noto Sans',sans-serif;outline:none;"></div><button onclick="this.textContent='Demo mode — balance: $0.00'" style="background:#448ADE;color:#fff;border:none;border-radius:6px;padding:13px;font-size:13px;font-weight:600;font-family:'Noto Sans',sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">CHECK BALANCE</button></div></div><div class="info-section"><h2>Gift Card Information</h2><ul><li>Available in denominations: $25, $50, $100, $200</li><li>Valid for 5 years from purchase date</li><li>Can be used online and in store</li><li>Cannot be exchanged for cash</li></ul></div>`},
+sizes:{title:'Size Guides',sub:'Find your perfect fit with our size charts.',body:`<div class="info-section"><h2>Women's Clothing</h2><table class="size-table"><tr><th>Size</th><th>Bust (cm)</th><th>Waist (cm)</th><th>Hips (cm)</th></tr><tr><td>XS</td><td>80–83</td><td>60–63</td><td>86–89</td></tr><tr><td>S</td><td>84–87</td><td>64–67</td><td>90–93</td></tr><tr><td>M</td><td>88–91</td><td>68–71</td><td>94–97</td></tr><tr><td>L</td><td>92–96</td><td>72–76</td><td>98–102</td></tr><tr><td>XL</td><td>97–102</td><td>77–82</td><td>103–108</td></tr></table></div><div class="info-section"><h2>Shoes</h2><table class="size-table"><tr><th>EU</th><th>UK</th><th>US</th><th>CM</th></tr><tr><td>36</td><td>3</td><td>5.5</td><td>23</td></tr><tr><td>37</td><td>4</td><td>6.5</td><td>23.5</td></tr><tr><td>38</td><td>5</td><td>7.5</td><td>24.5</td></tr><tr><td>39</td><td>6</td><td>8</td><td>25</td></tr><tr><td>40</td><td>7</td><td>9</td><td>25.5</td></tr></table></div><div class="info-highlight"><p>💡 Tip: If you're between sizes, we recommend sizing up for a more comfortable fit.</p></div>`},
+sustainability:{title:'Sustainability',sub:'Fashion that cares for the planet.',body:`<div class="info-section"><h2>Our Commitment</h2><p>At SUNSET, we believe beautiful fashion and environmental responsibility go hand in hand. We are committed to reducing our impact at every step of the supply chain.</p></div><div class="info-section"><h2>What We're Doing</h2><ul><li>80% of our fabrics from certified sustainable suppliers</li><li>All packaging is 100% recyclable and plastic-free</li><li>We offset the carbon footprint of every delivery</li><li>Our studio runs on 100% renewable energy</li><li>We donate 1% of profits to ocean cleanup</li></ul></div><div class="info-highlight"><p>🌿 Our goal: 100% sustainable materials by 2027.</p></div>`},
+terms:{title:'Terms & Conditions',sub:'Please read these terms carefully before using our website.',body:`<div class="info-section"><h2>1. Acceptance of Terms</h2><p>By accessing and using the SUNSET website, you accept and agree to be bound by these Terms and Conditions.</p></div><div class="info-section"><h2>2. Products and Pricing</h2><p>All prices are displayed in USD and include applicable taxes. We reserve the right to change prices at any time without notice.</p></div><div class="info-section"><h2>3. Orders and Payment</h2><p>By placing an order, you confirm that you are legally authorized to use the payment method provided. We reserve the right to refuse or cancel any order at our discretion.</p></div><div class="info-section"><h2>4. Intellectual Property</h2><p>All content on this website is the property of SUNSET and may not be reproduced without prior written permission.</p></div><div class="info-section"><h2>5. Governing Law</h2><p>These terms are governed by the laws of the Republic of Moldova.</p></div>`},
+privacy:{title:'Privacy Policy',sub:'How we collect, use, and protect your personal data.',body:`<div class="info-section"><h2>What Data We Collect</h2><ul><li>Name, email and password when you create an account</li><li>Delivery address and phone when you place an order</li><li>Payment information (processed securely — we never store card details)</li><li>Browsing behaviour on our website (via cookies)</li></ul></div><div class="info-section"><h2>How We Use Your Data</h2><ul><li>To process and deliver your orders</li><li>To manage your account and loyalty points</li><li>To send you order confirmations and shipping updates</li><li>To improve our website and personalize your experience</li></ul></div><div class="info-section"><h2>Your Rights</h2><ul><li>Access the personal data we hold about you</li><li>Request correction or deletion of your data</li><li>Withdraw consent for marketing at any time</li></ul></div>`},
+cookies:{title:'Cookie Policy',sub:'How we use cookies on the SUNSET website.',body:`<div class="info-section"><h2>What Are Cookies?</h2><p>Cookies are small text files stored on your device when you visit a website. They help us provide a better experience by remembering your preferences.</p></div><div class="info-section"><h2>Types of Cookies We Use</h2><ul><li><strong>Essential</strong> — required for the website to function (shopping bag, login session)</li><li><strong>Performance</strong> — help us understand how visitors use our site</li><li><strong>Functional</strong> — remember your preferences</li><li><strong>Marketing</strong> — used to show relevant ads (only with consent)</li></ul></div><div class="info-highlight"><p>🍪 This site stores your cart and account data locally in your browser using localStorage — no third-party tracking on your shopping.</p></div>`},
+slavery:{title:'Modern Slavery Act',sub:'Our commitment to ethical supply chains.',body:`<div class="info-section"><h2>Our Statement</h2><p>SUNSET is committed to ensuring that modern slavery and human trafficking have no place in our business or supply chains.</p></div><div class="info-section"><h2>Our Supply Chain</h2><p>We work with carefully selected suppliers, all of whom must sign our Supplier Code of Conduct prohibiting forced labour, child labour, and human trafficking.</p></div><div class="info-section"><h2>Due Diligence</h2><ul><li>All new suppliers undergo ethical screening before engagement</li><li>We conduct annual audits of our top suppliers</li><li>Employees receive training on identifying modern slavery</li></ul></div><div class="info-section"><h2>Reporting a Concern</h2><p>Contact us at <a href="mailto:ethics@sunset.md" style="color:#448ADE">ethics@sunset.md</a></p></div>`}
+};
+
+function openInfoPage(key) {
+    const page = INFO_PAGES[key];
+    if (!page) return;
+    document.getElementById('infoBody').innerHTML = `
+        <h1 class="font-mynerve">${page.title}</h1>
+        <p class="subtitle">${page.sub}</p>
+        ${page.body}`;
+    openInfo();
+}
+
+/* ═══════════ KEYBOARD ═══════════ */
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        if (document.getElementById('checkoutOverlay').style.display==='flex') { closeCheckoutModal(); return; }
+        if (document.getElementById('lightbox').classList.contains('active')) { closeLightbox(); return; }
+        const open = overlays.slice().reverse().find(o => document.getElementById(o).classList.contains('open'));
+        if (open) closeOverlay(open);
+    }
+    const lb = document.getElementById('lightbox');
+    if (lb.classList.contains('active')) {
+        if (e.key==='ArrowLeft') lightboxNav(-1);
+        if (e.key==='ArrowRight') lightboxNav(1);
+    }
+});
+
+/* ═══════════ CLICK OUTSIDE SEARCH ═══════════ */
+document.addEventListener('click', e => {
+    const sc = document.getElementById('searchContainer');
+    if (sc && !sc.contains(e.target)) closeSearch();
+});
+
+/* ═══════════ INIT ═══════════ */
+document.addEventListener('DOMContentLoaded', () => {
+    initHeroImages();
+    buildImageGrid('grid-accessories', IMAGES.accessories);
+    buildImageGrid('grid-beach', IMAGES.beach);
+    buildProductsGrid();
+    updateCartBadge();
+    loadProfile();
+});
+</script>
 </body>
 </html>
