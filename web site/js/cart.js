@@ -1,8 +1,3 @@
-/* ============================================================
-   cart.js — Logica coșului de cumpărături (localStorage)
-   Funcții disponibile global pe toate paginile.
-   ============================================================ */
-
 /* ── Citire / scriere ── */
 function getCart() {
     try { return JSON.parse(localStorage.getItem('sunset_cart') || '[]'); }
@@ -13,7 +8,7 @@ function saveCart(cart) {
 }
 
 /* ── Adaugă produs ── */
-function addToCart(product) {
+function addToCart(product) { // evenimente
     /* product = { src, name, price, color, qty } */
     const cart = getCart();
     const existing = cart.find(i => i.name === product.name && i.color === product.color);
@@ -54,22 +49,23 @@ function getCartTotal() {
 
 /* ── Badge număr articole pe iconița coș ── */
 function updateCartBadge() {
-    const badge = document.getElementById('cartBadge');
-    if (!badge) return;
     const total = getCart().reduce((s, i) => s + (i.qty || 1), 0);
-    if (total > 0) {
-        badge.textContent = total > 99 ? '99+' : total;
-        badge.style.display = 'flex';
-    } else {
-        badge.style.display = 'none';
-    }
+    const ids = ['cartBadge','cartBadge2','cartBadgeShop','cartBadgeProd',
+                 'cartBadgeCart','cartBadgeAcc','cartBadgeAbout','cartBadgeInfo'];
+    ids.forEach(id => {
+        const el = document.getElementById(id); // acesare elementelor si Lucrul cu DOM
+        if (!el) return;
+        // afișare număr total articole, cu limită la 99+
+        if (total > 0) { el.textContent = total > 99 ? '99+' : total; el.style.display = 'flex'; } //Manipularea DOM
+        else { el.style.display = 'none'; } //modificare vizibilite badge-ului
+    });
 }
 
 /* ── Toast notificare ── */
 function showCartToast(name) {
-    let toast = document.getElementById('cartToast');
+    let toast = document.getElementById('cartToast'); //Lucrul cu DOM
     if (!toast) {
-        toast = document.createElement('div');
+        toast = document.createElement('div'); // creare element toast dacă nu există
         toast.id = 'cartToast';
         toast.className = 'cart-toast';
         document.body.appendChild(toast);
@@ -80,7 +76,7 @@ function showCartToast(name) {
             <polyline points="20 6 9 17 4 12"/>
         </svg>
         <span><strong>${short}</strong> added to bag</span>`;
-    toast.classList.add('show');
+    toast.classList.add('show'); //stilizare prin clase css
     clearTimeout(toast._timer);
     toast._timer = setTimeout(() => toast.classList.remove('show'), 2800);
 }

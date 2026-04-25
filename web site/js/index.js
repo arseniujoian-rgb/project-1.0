@@ -1,8 +1,4 @@
-/* ============================================================
-   main.js — SUNSET | Summer Collection
-   Schimbă doar „src" și „alt". Fiecare razdel = exact 8 imagini.
-   ============================================================ */
-
+console.log('Salut lume');
 
 /* ── 1. HERO ── */
 const HERO_IMAGES = {
