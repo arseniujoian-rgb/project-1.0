@@ -1,0 +1,70 @@
+{
+  "hero": {
+    "largeLeft":  { "src": "../Assets/images/foto1.jpg", "alt": "Woman in boho outfit" },
+    "smallLeft":  { "src": "../Assets/images/foto2.jpg", "alt": "Man on beach" },
+    "largeRight": { "src": "../Assets/images/foto3.jpg", "alt": "Woman in blue shirt" },
+    "smallRight": { "src": "../Assets/images/foto4.jpg", "alt": "Man on boat" }
+  },
+
+  "images": {
+    "accessories": [
+      { "src": "../Assets/images/foto5.jpg", "alt": "Accessories 1" },
+      { "src": "../Assets/images/foto6.jpg", "alt": "Accessories 2" },
+      { "src": "../Assets/images/foto7.jpg", "alt": "Accessories 3" },
+      { "src": "../Assets/images/foto8.jpg", "alt": "Accessories 4" }
+    ],
+    "beach": [
+      { "src": "../Assets/images/foto9.jpg",  "alt": "Beach 1" },
+      { "src": "../Assets/images/foto10.jpg", "alt": "Beach 2" },
+      { "src": "../Assets/images/foto11.jpg", "alt": "Beach 3" },
+      { "src": "../Assets/images/foto12.jpg", "alt": "Beach 4" }
+    ]
+  },
+
+  "products": [
+    { "src": "../Assets/images/foto13.jpg",  "alt": "Sawyer Striped Barrel Overalls",  "name": "Sawyer Striped Barrel Overalls",  "price": "$98.00",  "badge": "ONLINE EXCLUSIVE", "color": "#E8D5C0", "cat": "all" },
+    { "src": "../Assets/images/foto14.jpg",  "alt": "Elvryn One Shoulder Romper",      "name": "Elvryn One Shoulder Romper",      "price": "$74.00",  "badge": "ONLINE EXCLUSIVE", "color": "#1A1A1A", "cat": "all" },
+    { "src": "../Assets/images/foto15.jpg",  "alt": "Alyssa Boatneck Tee",             "name": "Alyssa Boatneck Tee",             "price": "$44.00",  "badge": "ONLINE EXCLUSIVE", "color": "#F5F5F0", "cat": "all" },
+    { "src": "../Assets/images/foto16.jpg",  "alt": "Dakota Strapless Denim Romper",   "name": "Dakota Strapless Denim Romper",   "price": "$88.00",  "badge": "NEW",              "color": "#6B8BAE", "cat": "all" },
+    { "src": "../Assets/images/foto13b.jpg", "alt": "Remy Linen Shorts",               "name": "Remy Linen Shorts",               "price": "$52.00",  "badge": "NEW",              "color": "#D4B896", "cat": "all" },
+    { "src": "../Assets/images/foto14b.jpg", "alt": "Cora Wrap Blouse",                "name": "Cora Wrap Blouse",                "price": "$62.00",  "badge": "",                 "color": "#C9B8D4", "cat": "all" },
+    { "src": "../Assets/images/foto15b.jpg", "alt": "Isla Cropped Blazer",             "name": "Isla Cropped Blazer",             "price": "$118.00", "badge": "ONLINE EXCLUSIVE", "color": "#3D3D3D", "cat": "all" },
+    { "src": "../Assets/images/foto16b.jpg", "alt": "Noa Smocked Midi Skirt",          "name": "Noa Smocked Midi Skirt",          "price": "$79.00",  "badge": "NEW",              "color": "#E8C4A0", "cat": "all" },
+
+    { "src": "../Assets/images/foto18.jpg",  "alt": "Woven Straw Beach Bag",   "name": "Woven Straw Beach Bag",   "price": "$56.00", "badge": "ONLINE EXCLUSIVE", "color": "#C4A882", "cat": "accessories" },
+    { "src": "../Assets/images/acc1.jpg",    "alt": "Shell Drop Earrings",     "name": "Shell Drop Earrings",     "price": "$24.00", "badge": "NEW",              "color": "#F0D080", "cat": "accessories" },
+    { "src": "../Assets/images/acc2.jpg",    "alt": "Raffia Sun Hat",          "name": "Raffia Sun Hat",          "price": "$38.00", "badge": "",                 "color": "#C8A96E", "cat": "accessories" },
+    { "src": "../Assets/images/acc3.jpg",    "alt": "Beaded Anklet Set",       "name": "Beaded Anklet Set",       "price": "$18.00", "badge": "NEW",              "color": "#A8C4D4", "cat": "accessories" },
+    { "src": "../Assets/images/acc4.jpg",    "alt": "Linen Scarf",             "name": "Linen Scarf",             "price": "$32.00", "badge": "",                 "color": "#D4C4B0", "cat": "accessories" },
+    { "src": "../Assets/images/acc5.jpg",    "alt": "Gold Chain Belt",         "name": "Gold Chain Belt",         "price": "$44.00", "badge": "ONLINE EXCLUSIVE", "color": "#C09E44", "cat": "accessories" },
+    { "src": "../Assets/images/acc6.jpg",    "alt": "Tortoise Sunglasses",     "name": "Tortoise Sunglasses",     "price": "$48.00", "badge": "NEW",              "color": "#8B5E3C", "cat": "accessories" },
+    { "src": "../Assets/images/acc7.jpg",    "alt": "Canvas Tote Bag",         "name": "Canvas Tote Bag",         "price": "$36.00", "badge": "",                 "color": "#E8E0D0", "cat": "accessories" },
+
+    { "src": "../Assets/images/foto17.jpg",  "alt": "Mila Linen Midi Dress",   "name": "Mila Linen Midi Dress",   "price": "$112.00", "badge": "NEW",              "color": "#E8D4C0", "cat": "dresses" },
+    { "src": "../Assets/images/dress1.jpg",  "alt": "Aria Floral Wrap Dress",  "name": "Aria Floral Wrap Dress",  "price": "$96.00",  "badge": "NEW",              "color": "#E8A0A0", "cat": "dresses" },
+    { "src": "../Assets/images/dress2.jpg",  "alt": "Sage Smocked Sundress",   "name": "Sage Smocked Sundress",   "price": "$84.00",  "badge": "",                 "color": "#9DB89D", "cat": "dresses" },
+    { "src": "../Assets/images/dress3.jpg",  "alt": "Luna Halter Maxi",        "name": "Luna Halter Maxi",        "price": "$128.00", "badge": "ONLINE EXCLUSIVE", "color": "#F0E8D0", "cat": "dresses" },
+    { "src": "../Assets/images/dress4.jpg",  "alt": "Zara Mini Crochet Dress", "name": "Zara Mini Crochet Dress", "price": "$78.00",  "badge": "NEW",              "color": "#F0E0B0", "cat": "dresses" },
+    { "src": "../Assets/images/dress5.jpg",  "alt": "Demi Off-Shoulder Dress", "name": "Demi Off-Shoulder Dress", "price": "$92.00",  "badge": "",                 "color": "#D4B0C8", "cat": "dresses" },
+    { "src": "../Assets/images/dress6.jpg",  "alt": "Cleo Ruched Slip Dress",  "name": "Cleo Ruched Slip Dress",  "price": "$88.00",  "badge": "ONLINE EXCLUSIVE", "color": "#C8A0A0", "cat": "dresses" },
+    { "src": "../Assets/images/dress7.jpg",  "alt": "Nova Tiered Boho Dress",  "name": "Nova Tiered Boho Dress",  "price": "$104.00", "badge": "NEW",              "color": "#A0B8C8", "cat": "dresses" },
+
+    { "src": "../Assets/images/foto19.jpg",  "alt": "Cara High-Rise Wide Leg",  "name": "Cara High-Rise Wide Leg",  "price": "$94.00", "badge": "",                 "color": "#5B7FA6", "cat": "jeans" },
+    { "src": "../Assets/images/jeans1.jpg",  "alt": "Nico Straight Leg Jeans",  "name": "Nico Straight Leg Jeans",  "price": "$86.00", "badge": "NEW",              "color": "#4A6B8A", "cat": "jeans" },
+    { "src": "../Assets/images/jeans2.jpg",  "alt": "Roxy Barrel Denim",        "name": "Roxy Barrel Denim",        "price": "$98.00", "badge": "ONLINE EXCLUSIVE", "color": "#6B8BAE", "cat": "jeans" },
+    { "src": "../Assets/images/jeans3.jpg",  "alt": "Faye Cropped Flare Jeans", "name": "Faye Cropped Flare Jeans", "price": "$92.00", "badge": "",                 "color": "#3A5A7A", "cat": "jeans" },
+    { "src": "../Assets/images/jeans4.jpg",  "alt": "Reese Mom Jeans",          "name": "Reese Mom Jeans",          "price": "$78.00", "badge": "NEW",              "color": "#7090B0", "cat": "jeans" },
+    { "src": "../Assets/images/jeans5.jpg",  "alt": "Lola Low-Rise Bootcut",    "name": "Lola Low-Rise Bootcut",    "price": "$82.00", "badge": "",                 "color": "#4A6B8A", "cat": "jeans" },
+    { "src": "../Assets/images/jeans6.jpg",  "alt": "Ivy Distressed Skinny",    "name": "Ivy Distressed Skinny",    "price": "$74.00", "badge": "ONLINE EXCLUSIVE", "color": "#2F4F6F", "cat": "jeans" },
+    { "src": "../Assets/images/jeans7.jpg",  "alt": "Kai Relaxed Denim",        "name": "Kai Relaxed Denim",        "price": "$88.00", "badge": "NEW",              "color": "#5A7A9A", "cat": "jeans" },
+
+    { "src": "../Assets/images/foto20.jpg",  "alt": "Sienna Leather Sandals",    "name": "Sienna Leather Sandals",    "price": "$68.00", "badge": "NEW",              "color": "#C4956A", "cat": "shoes" },
+    { "src": "../Assets/images/shoes1.jpg",  "alt": "Demi Espadrille Wedges",    "name": "Demi Espadrille Wedges",    "price": "$82.00", "badge": "ONLINE EXCLUSIVE", "color": "#D4A870", "cat": "shoes" },
+    { "src": "../Assets/images/shoes2.jpg",  "alt": "Ava Strappy Heels",         "name": "Ava Strappy Heels",         "price": "$96.00", "badge": "NEW",              "color": "#1A1A1A", "cat": "shoes" },
+    { "src": "../Assets/images/shoes3.jpg",  "alt": "Zoe Woven Flats",           "name": "Zoe Woven Flats",           "price": "$58.00", "badge": "",                 "color": "#C8B090", "cat": "shoes" },
+    { "src": "../Assets/images/shoes4.jpg",  "alt": "Mara Platform Sandals",     "name": "Mara Platform Sandals",     "price": "$74.00", "badge": "NEW",              "color": "#A0784A", "cat": "shoes" },
+    { "src": "../Assets/images/shoes5.jpg",  "alt": "Nala Slide Mules",          "name": "Nala Slide Mules",          "price": "$62.00", "badge": "",                 "color": "#E8D0B0", "cat": "shoes" },
+    { "src": "../Assets/images/shoes6.jpg",  "alt": "River Ankle Strap Sandals", "name": "River Ankle Strap Sandals", "price": "$72.00", "badge": "ONLINE EXCLUSIVE", "color": "#C09E44", "cat": "shoes" },
+    { "src": "../Assets/images/shoes7.jpg",  "alt": "Talia Raffia Mules",        "name": "Talia Raffia Mules",        "price": "$66.00", "badge": "NEW",              "color": "#C8A96E", "cat": "shoes" }
+  ]
+}

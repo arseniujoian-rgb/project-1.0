@@ -1,0 +1,527 @@
+/* ============================================================
+   mobile.css — Responsive design pentru telefon
+   Breakpoint principal: 768px
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    /* ── HEADER ── */
+    .main-header {
+        height: 64px;
+    }
+
+    .nav-container {
+        padding: 0 16px;
+        grid-template-columns: auto 1fr auto;
+        gap: 0;
+    }
+
+    .nav-links {
+        display: none; /* ascuns pe mobil */
+    }
+
+    .logo-center img {
+        height: 46px;
+    }
+
+    .nav-right {
+        gap: 10px;
+    }
+
+    /* Ascunde textele din nav-right, păstrează doar iconițele */
+    .nav-right > a:not(.icon-circle-btn) {
+        display: none;
+    }
+
+    .search-container {
+        display: none; /* căutarea se poate adăuga ca icon separat */
+    }
+
+    .nav-icons {
+        gap: 8px;
+    }
+
+    /* ── PAGINA PRINCIPALĂ ── */
+    .page-wrapper {
+        margin: 80px auto 0;
+        padding: 0 16px;
+    }
+
+    .asymmetric-section {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 60px;
+    }
+
+    .left-content {
+        padding-right: 0;
+        order: 2;
+    }
+
+    .right-content {
+        padding-left: 0;
+        padding-top: 0;
+        order: 1;
+    }
+
+    .mt-large { margin-top: 0; }
+
+    .title-huge {
+        font-size: 38px;
+        letter-spacing: 1px;
+        margin-bottom: 14px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .img-large {
+        height: 420px;
+        border-radius: 12px;
+    }
+
+    .img-small {
+        width: 100%;
+        height: 280px;
+        border-radius: 12px;
+    }
+
+    /* ── SECȚIUNI PRODUSE ── */
+    .product-showcase {
+        margin-bottom: 60px;
+    }
+
+    .title-center {
+        font-size: 36px;
+        margin-bottom: 6px;
+    }
+
+    .label-category {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .four-col-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .four-col-grid img {
+        border-radius: 10px;
+    }
+
+    /* ── SHOP OVERLAY ── */
+    .shop-header {
+        height: 64px;
+    }
+
+    .btn-close {
+        right: 16px;
+        font-size: 12px;
+    }
+
+    .shop-content {
+        grid-template-columns: 1fr;
+        padding: 20px 16px 60px;
+        gap: 24px;
+    }
+
+    .shop-sidebar {
+        position: static;
+    }
+
+    .shop-title {
+        font-size: 34px;
+    }
+
+    /* Filtre pe orizontală pe mobil */
+    .sidebar-filters {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sidebar-filters::-webkit-scrollbar { display: none; }
+
+    .sidebar-filters li {
+        white-space: nowrap;
+        border: 1px solid rgba(192,158,68,0.3);
+        border-bottom: 1px solid rgba(192,158,68,0.3);
+        border-radius: 20px;
+        padding: 6px 14px;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+
+    .sidebar-filters li.active {
+        background: #C09E44;
+        color: #fff;
+        border-color: #C09E44;
+    }
+
+    .sidebar-title { margin-bottom: 10px; }
+    .breadcrumb { display: none; }
+
+    /* Grid produse 2 coloane */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    .product-name { font-size: 12px; }
+    .product-price { font-size: 13px; }
+
+    /* ── CART ── */
+    .cart-page {
+        margin: 80px auto 60px;
+        padding: 0 16px;
+    }
+
+    .cart-title { font-size: 38px; margin-bottom: 20px; }
+
+    .cart-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .cart-item {
+        grid-template-columns: 72px 1fr auto;
+        gap: 12px;
+        padding: 14px 0;
+    }
+
+    .cart-item-img {
+        width: 72px;
+        height: 90px;
+    }
+
+    .cart-summary {
+        position: static;
+    }
+
+    /* ── PRODUCT PAGE ── */
+    .back-wrap {
+        margin: 74px auto 0;
+        padding: 14px 16px 0;
+    }
+
+    .product-page {
+        grid-template-columns: 1fr;
+        margin: 10px auto 60px;
+        padding: 0 16px;
+        gap: 24px;
+    }
+
+    .product-gallery {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .thumb-col {
+        flex-direction: row;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .thumb {
+        width: 60px;
+        height: 74px;
+    }
+
+    .main-img-wrap img {
+        max-height: 420px;
+        border-radius: 10px;
+    }
+
+    /* ── ACCOUNT ── */
+    .account-page {
+        margin: 80px auto 60px;
+        padding: 0 16px;
+    }
+
+    .acc-title { font-size: 36px; }
+
+    .profile-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .profile-card { padding: 14px 8px; }
+    .pc-val { font-size: 18px; }
+
+    /* ── ABOUT ── */
+    .about-page {
+        margin: 80px auto 60px !important;
+        padding: 0 16px !important;
+    }
+
+    .about-hero { padding: 40px 0 50px !important; }
+    .about-hero h1 { font-size: 52px !important; }
+    .about-hero p { font-size: 15px !important; }
+
+    .about-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+        margin-bottom: 40px !important;
+    }
+
+    .about-grid.reverse { direction: ltr !important; }
+
+    .about-text h2 { font-size: 32px !important; }
+
+    .about-values {
+        padding: 36px 20px !important;
+        border-radius: 14px !important;
+    }
+
+    .about-values h2 { font-size: 34px !important; }
+
+    .values-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .about-cta h2 { font-size: 34px !important; }
+
+    /* ── FOOTER ── */
+    .dark-footer {
+        padding: 40px 16px 24px;
+    }
+
+    .footer-main {
+        flex-direction: column;
+        gap: 32px;
+        margin-bottom: 32px;
+    }
+
+    .social-area {
+        text-align: left;
+    }
+
+    .social-icons {
+        justify-content: flex-start;
+    }
+
+    .secure-payment { text-align: left; }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 14px;
+        text-align: center;
+    }
+
+    .legal-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+    }
+
+    .legal-links span {
+        padding: 0 8px;
+        font-size: 11px;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-prev { left: 8px; padding: 12px 14px; }
+    .lightbox-next { right: 8px; padding: 12px 14px; }
+
+    /* ── SEARCH DROPDOWN ── */
+    .search-dropdown {
+        width: calc(100vw - 32px);
+        right: -16px;
+    }
+
+    /* ── CHECKOUT MODAL ── */
+    .checkout-modal {
+        padding: 28px 20px;
+        border-radius: 12px 12px 0 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 16px 16px 0 0;
+    }
+
+    /* ── CART TOAST ── */
+    .cart-toast {
+        bottom: 16px;
+        right: 16px;
+        left: 16px;
+        max-width: none;
+    }
+
+    /* ── HAMBURGER MENU ── */
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 4px;
+        background: none;
+        border: none;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: #C09E44;
+        border-radius: 2px;
+        transition: all 0.3s;
+    }
+
+    /* Meniu mobil slide-in */
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #F8F5F0;
+        z-index: 999;
+        padding: 32px 24px;
+        gap: 24px;
+        transform: translateX(-100%);
+        transition: transform 0.35s cubic-bezier(0.77,0,0.175,1);
+    }
+
+    .mobile-menu.open {
+        transform: translateX(0);
+    }
+
+    .mobile-menu a {
+        font-size: 22px;
+        font-family: 'Mynerve', cursive;
+        color: #C09E44;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(192,158,68,0.15);
+        padding-bottom: 18px;
+        transition: opacity 0.2s;
+    }
+
+    .mobile-menu a:hover { opacity: 0.7; }
+
+    /* Search pe mobil */
+    .mobile-search {
+        display: flex;
+        align-items: center;
+        border: 1px solid #C09E44;
+        border-radius: 8px;
+        padding: 10px 14px;
+        gap: 10px;
+        margin-top: 8px;
+    }
+
+    .mobile-search input {
+        border: none;
+        background: none;
+        outline: none;
+        font-family: 'Noto Sans', sans-serif;
+        font-size: 14px;
+        color: #2F2F2F;
+        flex: 1;
+    }
+
+    .mobile-search input::placeholder {
+        color: #C09E44;
+        opacity: 0.7;
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+}
+
+/* ── Extra mic (iPhone SE) ── */
+@media (max-width: 380px) {
+    .title-huge { font-size: 30px; }
+    .cart-title { font-size: 30px; }
+    .acc-title  { font-size: 28px; }
+    .products-grid { gap: 10px; }
+    .profile-grid { gap: 6px; }
+    .pc-val { font-size: 16px; }
+}
+
+/* ── Fix hamburger: ascuns pe desktop ── */
+.hamburger {
+    display: none;
+}
+
+/* ── Fix spacing mobil ── */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 4px;
+        background: none;
+        border: none;
+        margin-left: 4px;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: #C09E44;
+        border-radius: 2px;
+        transition: all 0.3s;
+    }
+
+    /* Spațiere mai mare între secțiuni */
+    .page-wrapper {
+        margin-top: 90px;
+    }
+
+    .asymmetric-section {
+        margin-bottom: 80px;
+    }
+
+    .product-showcase {
+        margin-bottom: 80px;
+    }
+
+    /* Padding mai mare între elemente */
+    .left-content {
+        padding-top: 24px;
+    }
+
+    .btn-blue {
+        padding: 12px 32px;
+        font-size: 14px;
+        margin-top: 8px;
+        display: inline-block;
+    }
+
+    /* Mai mult spațiu vertical în general */
+    .title-huge {
+        margin-bottom: 20px;
+    }
+
+    .subtitle {
+        margin-bottom: 28px;
+    }
+
+    /* Imagini cu border-radius mai estetic */
+    .img-large {
+        height: 460px;
+        border-radius: 16px;
+    }
+
+    .img-small {
+        border-radius: 16px;
+        margin-top: 16px;
+    }
+}
